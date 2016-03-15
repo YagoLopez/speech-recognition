@@ -1,6 +1,6 @@
 var speechApp = angular.module('app-reconocimiento-voz', []);
 
-speechApp.factory('ServicioReconocimientoVoz', function ($rootScope) {
+speechApp.factory('ReconocimientoVoz', function ($rootScope) {
 
     var service = {};
 
@@ -13,7 +13,7 @@ speechApp.factory('ServicioReconocimientoVoz', function ($rootScope) {
         var command = {};
 
         command[phrase] = function(args) {
-            //$rootScope.$apply(callback(args));
+            $rootScope.$apply(callback(args));
         };
 
         // Extend our commands list
@@ -36,50 +36,52 @@ speechApp.factory('ServicioReconocimientoVoz', function ($rootScope) {
         annyang.setLanguage(codigoLenguage); // 'es-ES' -> spanish
     };
 
-    //service.toggle = function () {
-      //if(annyang.isListening()) {
-      //    annyang.abort();
-      //    console.log('abortado');
-      //    console.log('is listening', annyang.isListening());
-      //} else {
-      //    annyang.start();
-      //    console.log('activado');
-      //    console.log('is listening', annyang.isListening());
-      //}
-    //};
+    service.toggle = function () {
+      if(annyang.isListening()) {
+          annyang.abort();
+          console.log('Reconocimiento de voz desactivado');
+          //console.log('is listening', annyang.isListening());
+      } else {
+          annyang.start();
+          console.log('Reconocimiento de voz activado');
+          //console.log('is listening', annyang.isListening());
+      }
+    };
 
     //service.isListening = annyang.isListening();
 
     return service;
 });
 
-speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocimientoVoz, $scope) {
+speechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope) {
 
     if(!annyang){
-        alert('El navegador no soporta reconocimiento de voz. Pruebe con Chrome');
+        alert('El navegador no soporta reconocimiento de voz. Probar con Chrome');
         return;
     }
+
+    $scope.statusMessage = null;
 
     var vm = this;
 
     vm.init = function() {
         vm.clearResults();
 
-        ServicioReconocimientoVoz.setLanguage('es-ES');
+        ReconocimientoVoz.setLanguage('es-ES');
 
-        ServicioReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
-            console.debug(allSpeech);
-            vm.addResult(allSpeech);
-        });
-
-/*
-        ServicioReconocimientoVoz.addCommand('siguiente', function () {
+        //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
+        //    console.debug(allSpeech);
+        //    vm.addResult(allSpeech);
+        //});
+        ReconocimientoVoz.addCommand('siguiente', function () {
             console.log('redirigiendo a dos.html');
             window.location.href = 'dos.html';
         });
-*/
-
-        ServicioReconocimientoVoz.start();
+         ReconocimientoVoz.addCommand('desactivar voz', function () {
+         console.log('desactivar voz');
+         annyang.abort();
+         });
+        ReconocimientoVoz.start();
     };
 
     vm.addResult = function(result) {
@@ -97,12 +99,8 @@ speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocim
     vm.init();
 
     annyang.addCallback('start', function () {
-        var status = 'Esperando comando de voz...';
-        //console.log('status', status);
-        $scope.status = status;
-        //$scope.isListening = true;
-        //console.log('is listening', annyang.isListening);
-        //$scope.$apply();
+        $scope.statusMessage = 'Reconocimiento de voz activado. Esperando comando de voz...';
+        $scope.$apply();
     });
     //annyang.addCallback('error', function () {
     //    console.warn('error reconocimiento de voz')
@@ -116,9 +114,11 @@ speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocim
     annyang.addCallback('errorPermissionDenied', function () {
         console.warn('error permission denied')
     });
-    //annyang.addCallback('end', function () {
-    //    console.log('fin sesión reconocimiento de voz')
-    //});
+    annyang.addCallback('end', function () {
+        //console.log('fin sesión reconocimiento de voz');
+        $scope.statusMessage = 'Reconocimiento de voz desactivado';
+        $scope.$apply();
+    });
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
         console.log('Texto reconocido: ', userSaid);
         console.log('Nombre de funcion ejecutada: ', commandText);
@@ -131,26 +131,7 @@ speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocim
     });
 
     $scope.annyang = annyang;
-
-    $scope.toggle = function () {
-        if (annyang.isListening()) {
-            //console.log('is listening', annyang.isListening());
-            annyang.abort();
-            console.log('abortado');
-            console.log('is listening', annyang.isListening());
-        } else {
-            //console.log('is listening', annyang.isListening());
-            annyang.start();
-            console.log('activado');
-            console.log('is listening', annyang.isListening());
-        }
-    };
-
-    //$scope.isListening = function () {
-    //    return annyang.isListening();
-    //};
-
-
+    $scope.toggle = ReconocimientoVoz.toggle;
 
 
 
