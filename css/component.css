@@ -58,6 +58,7 @@ body {
 	font-weight: normal;
 	margin: 0 auto;
 	padding: 1em 0 0 0;
+    /*padding: 0 0 0 0;*/
 }
 
 .slide__title span {
@@ -66,7 +67,8 @@ body {
 	display: block;
 	letter-spacing: 2px;
 	text-transform: uppercase;
-	color: #35303d;
+	/*color: #35303d;*/
+    color:cyan;
 }
 
 .slider__nav {
@@ -84,7 +86,8 @@ body {
 	margin: 0 25px;
 	padding: 0;
 	cursor: pointer;
-	color: #5c5edc;
+	/*color: #5c5edc;*/
+    color: cornflowerblue;
 	border: none;
 	background: none;
 }
@@ -106,10 +109,12 @@ body {
 	font-size: 1.55em;
 	position: absolute;
 	top: 30px;
-	right: 30px;
+	/*right: 30px;*/
+    right: 15px;
 	margin: 0;
 	opacity: 0;
-	color: #50505a;
+	/*color: #50505a;*/
+    color:cornflowerblue;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
 }
@@ -122,6 +127,7 @@ body {
 .zoomer {
 	position: relative;
 	height: 360px; /* this is needed for IE10 so that vertical flexbox centering works */
+    /*height: 320px;*/
 }
 
 .flex-center {
@@ -331,14 +337,18 @@ body {
 }
 
 .zoomer__image {
+    /*
 	-webkit-transition: opacity 0.3s 0.3s;
 	transition: opacity 0.3s 0.3s;
+    */
 }
 
 .zoomer--active .zoomer__image {
+    /*
 	opacity: 0;
 	-webkit-transition-delay: 0s;
 	transition-delay: 0s;
+    */
 }
 
 .preview img {

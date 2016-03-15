@@ -11,4 +11,10 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectRootManager" version="2" />
+  <component name="TaskProjectConfiguration">
+    <server type="GitHub" url="https://github.com" />
+  </component>
+  <component name="UnicodeBrowser">
+    <option name="fontName" value="Monospaced" />
+  </component>
 </project>

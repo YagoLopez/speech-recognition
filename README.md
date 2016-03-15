@@ -1,6 +1,6 @@
-#Blueprint: Zoom Slider
+# Speech Recognition Demo
 
-A simple content slider with depth-like zoom functionality for a predefined area in each slide.
+Reconocimiento de voz para aplicaciones móviles
 
 [Article on Codrops](http://tympanus.net/codrops/?p=24330)
 

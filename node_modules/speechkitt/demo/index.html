@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Speech KITT</title>
+    <style>
+        body {
+            margin: 0 0;
+            padding: 0 0;
+        }
+        img#sample_site {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<script>
+    // For demo purposes only, show screenshots of different sites in the background
+    (function() {
+        var getRandomIntInclusive = function (min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        var img = document.createElement('img');
+        img.src = 'sample_sites/'+getRandomIntInclusive(1,4)+'.jpg';
+        img.id = 'sample_site';
+        document.body.appendChild(img);
+    })();
+</script>
+
+<script src="../dist/speechkitt.min.js"></script>
+<script>
+    // Init the browser's own Speech Recognition
+    var recognition = new webkitSpeechRecognition();
+
+    // Tell KITT the command to use to start listening
+    SpeechKITT.setStartCommand(function() {recognition.start()});
+
+    // Tell KITT the command to use to abort listening
+    SpeechKITT.setAbortCommand(function() {recognition.abort()});
+
+    // Register KITT's recognition start event with the browser's Speech Recognition
+    recognition.addEventListener('start', SpeechKITT.onStart);
+
+    // Register KITT's recognition end event with the browser's Speech Recognition
+    recognition.addEventListener('end', SpeechKITT.onEnd);
+
+    // Define a stylesheet for KITT to use
+    SpeechKITT.setStylesheet('/dist/themes/flat.css');
+
+    // Add instructional texts
+    SpeechKITT.setInstructionsText('Some commands to try…');
+    SpeechKITT.setSampleCommands(['Show directions', 'Call restaurant']);
+
+    // Render KITT's interface
+    SpeechKITT.vroom();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+/* Put your css in here */
+
+.jsSpeechFactory-container {
+  position:relative;
+}
+
+.jsSpeechFactory-hint {
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+}
+.jsSpeechFactory-btn{
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 35%;
+}

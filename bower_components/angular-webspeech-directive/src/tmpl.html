@@ -1,0 +1,11 @@
+<div class="jsSpeechFactory-container">
+	<a href="" ng-click="Speech.toggle();" class="jsSpeechFactory-btn">
+		<img class="jsSpeechFactory-icon" src="http://placehold.it/50" ng-src="{{Speech.model.icon}}" alt="Mic Status" />
+	</a>
+	<p class="speech-hint">
+		<strong class="jsSpeechFactory-status"></strong>
+		<span class="jsSpeechFactory-message">{{Speech.model.message}}</span>
+	</p>
+	<textarea class="form-control" rows="2" ng-model="ngModel"></textarea>
+	<div ng-transclude></div>
+</div>

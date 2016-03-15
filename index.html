@@ -1,3 +1,6 @@
+<!--todo: primera pagina de presentacion-->
+<!--todo: segunda pagina demostracion de comandos-->
+<!--todo: tercera pagina introduccion de texto en controles de texto-->
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
@@ -15,24 +18,76 @@
 	<link rel="stylesheet" type="text/css" href="css/demo.css" />
 	<!-- Component styles -->
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
-	<script src="js/modernizr.custom.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+    <script src="bower_components/annyang/annyang.js"></script>
+    <script src="node_modules/speechkitt/src/speechkitt.js"></script>
+    <script>
+/*        if (annyang) {
+            var commands = {
+                'hola': function() { alert('Hello world!'); },
+                'siguiente': function () {
+                    console.log('dos.html');
+                    window.location.href = 'dos.html';
+                },
+                'fin': function () {
+                    console.log('finalizando sesion de voz mediante comando de voz');
+                    annyang.abort();
+                }
+            };
+
+            // Add our commands to annyang
+            annyang.addCommands(commands);
+            annyang.setLanguage('es-ES');
+            annyang.debug(false);
+
+            annyang.addCallback('start', function () {
+                console.log('inicio')
+            });
+            annyang.addCallback('error', function () {
+                console.warn('error reconocimiento de voz')
+            });
+            annyang.addCallback('errorNetwork', function () {
+                console.warn('error network')
+            });
+            annyang.addCallback('errorPermissionBlocked', function () {
+                console.warn('error permission blocked')
+            });
+            annyang.addCallback('errorPermissionDenied', function () {
+                console.warn('error permission denied')
+            });
+            annyang.addCallback('end', function () {
+                console.log('fin sesión reconocimiento de voz')
+            });
+            annyang.addCallback('result', function (res) {
+                console.info('Reconocimiento de voz positivo. Resultado: ')
+            });
+            annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
+                console.log('Texto reconocido: ', userSaid); // sample output: 'hello'
+                console.log('Nombre de funcion ejecutada: ', commandText); // sample output: 'hello (there)'
+                console.log('Resultados posibles por orden de probabilidad: ', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
+            });
+            annyang.addCallback('resultNoMatch', function (res) {
+                console.warn('No se han reconocido comandos para:', res)
+            });
+
+            // Start listening.
+            annyang.start({autoRestart: false, continuous: false});
+
+//            var toggleRecognition = function () {
+//                if( annyang.isListening() ){
+//                    annyang.abort()
+//                } else { annyang.start() }
+//            }
+        }*/
+    </script>
+
 </head>
-<body>
+<body ng-app="app-reconocimiento-voz">
+
+
 	<!-- Main container -->
-	<div class="container">
-		<!-- Blueprint header -->
-<!--
-		<header class="bp-header cf">
-			<span>Blueprint <span class="bp-icon bp-icon-about" data-content="The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration."></span></span>
-			<h1>Zoom Slider</h1>
-			<nav>
-				<a href="http://tympanus.net/Blueprints/FilterableProductGrid/" class="bp-icon bp-icon-prev" data-info="previous Blueprint"><span>Previous Blueprint</span></a>
-				&lt;!&ndash;a href="" class="bp-icon bp-icon-next" data-info="next Blueprint"><span>Next Blueprint</span></a&ndash;&gt;
-				<a href="http://tympanus.net/codrops/?p=24330" class="bp-icon bp-icon-drop" data-info="back to the Codrops article"><span>back to the Codrops article</span></a>
-				<a href="http://tympanus.net/codrops/category/blueprints/" class="bp-icon bp-icon-archive" data-info="Blueprints archive"><span>Go to the archive</span></a>
-			</nav>
-		</header>
--->
+	<div class="container" ng-controller="ControladorReconocimientoVoz">
+
 		<!-- Grid -->
 		<section class="slider">
 			<div class="slide slide--current" data-content="content-1">
@@ -46,7 +101,10 @@
 						</div>
 					</div>
 				</div>
-				<h2 class="slide__title"><span>The Classy</span> iPhone 6</h2>
+				<h2 class="slide__title">
+                    <!--<span>Demostración</span>-->
+                    Reconocimento de Voz
+                </h2>
 			</div>
 			<div class="slide" data-content="content-2">
 				<div class="slide__mover">
@@ -98,8 +156,7 @@
 					<span class="text-hidden">Anterior</span>
 				</button>
 				<button class="button button--zoom">
-					<i class="icon icon--zoom"></i>
-					<div style="font-size:12px;">Detalles</div>
+					<i class="icon icon--zoom"></i><div style="font-size:12px;">Ayuda</div>
 				</button>
 				<button class="button button--nav-next">
 					<i class="icon icon--arrow-right"></i>
@@ -156,9 +213,21 @@
 			</div>
 			<button class="button button--close"><i class="icon icon--circle-cross"></i><span class="text-hidden">Close content</span></button>
 		</section>
+
+        <section id="pie-pagina">
+            <div style="text-align:center;">
+                <a ng-if="annyang.isListening()" href="#" onclick="annyang.start()">Hablar</a>
+                <a ng-if="!annyang.isListening()" href="#" onclick="annyang.abort()">Finalizar</a>
+                &nbsp;
+                <a href="#" onclick="annyang.abort();">Finalizar</a>
+            </div>
+            <div>resultados: {{ userSaid }}</div>
+        </section>
+
 	</div>
 	<script src="js/classie.js"></script>
 	<script src="js/dynamics.min.js"></script>
 	<script src="js/main.js"></script>
-</body>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="js/angular-app.js"></script></body>
 </html>
