@@ -216,11 +216,11 @@
 
         <section id="pie-pagina">
             <div style="text-align:center;">
-                <a ng-if="annyang.isListening()" href="#" onclick="annyang.start()">Hablar</a>
-                <a ng-if="!annyang.isListening()" href="#" onclick="annyang.abort()">Finalizar</a>
-                &nbsp;
-                <a href="#" onclick="annyang.abort();">Finalizar</a>
+                <a href="#" ng-click="toggle()">Hablar</a>
+                <!--<a ng-if="!isListening" href="#" ng-click="toggle()">Finalizar</a>-->
             </div>
+            <div>is listening: {{ annyang.isListening() }}</div>
+            <div>Estado: {{ status }}</div>
             <div>resultados: {{ userSaid }}</div>
         </section>
 

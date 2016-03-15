@@ -13,7 +13,7 @@ speechApp.factory('ServicioReconocimientoVoz', function ($rootScope) {
         var command = {};
 
         command[phrase] = function(args) {
-            $rootScope.$apply(callback(args));
+            //$rootScope.$apply(callback(args));
         };
 
         // Extend our commands list
@@ -36,15 +36,19 @@ speechApp.factory('ServicioReconocimientoVoz', function ($rootScope) {
         annyang.setLanguage(codigoLenguage); // 'es-ES' -> spanish
     };
 
-    service.onOff = function () {
-      if(annyang.isListening()) {
-          console.log('desactivar');
-          annyang.abort();
-      } else {
-          console.log('activar');
-          this.start();
-      }
-    };
+    //service.toggle = function () {
+      //if(annyang.isListening()) {
+      //    annyang.abort();
+      //    console.log('abortado');
+      //    console.log('is listening', annyang.isListening());
+      //} else {
+      //    annyang.start();
+      //    console.log('activado');
+      //    console.log('is listening', annyang.isListening());
+      //}
+    //};
+
+    //service.isListening = annyang.isListening();
 
     return service;
 });
@@ -93,7 +97,12 @@ speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocim
     vm.init();
 
     annyang.addCallback('start', function () {
-        console.log('inicio')
+        var status = 'Esperando comando de voz...';
+        //console.log('status', status);
+        $scope.status = status;
+        //$scope.isListening = true;
+        //console.log('is listening', annyang.isListening);
+        //$scope.$apply();
     });
     //annyang.addCallback('error', function () {
     //    console.warn('error reconocimiento de voz')
@@ -107,9 +116,9 @@ speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocim
     annyang.addCallback('errorPermissionDenied', function () {
         console.warn('error permission denied')
     });
-    annyang.addCallback('end', function () {
-        console.log('fin sesión reconocimiento de voz')
-    });
+    //annyang.addCallback('end', function () {
+    //    console.log('fin sesión reconocimiento de voz')
+    //});
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
         console.log('Texto reconocido: ', userSaid);
         console.log('Nombre de funcion ejecutada: ', commandText);
@@ -120,6 +129,29 @@ speechApp.controller('ControladorReconocimientoVoz', function (ServicioReconocim
     annyang.addCallback('resultNoMatch', function (res) {
         console.warn('No se han reconocido comandos para:', res)
     });
+
+    $scope.annyang = annyang;
+
+    $scope.toggle = function () {
+        if (annyang.isListening()) {
+            //console.log('is listening', annyang.isListening());
+            annyang.abort();
+            console.log('abortado');
+            console.log('is listening', annyang.isListening());
+        } else {
+            //console.log('is listening', annyang.isListening());
+            annyang.start();
+            console.log('activado');
+            console.log('is listening', annyang.isListening());
+        }
+    };
+
+    //$scope.isListening = function () {
+    //    return annyang.isListening();
+    //};
+
+
+
 
 
 });
