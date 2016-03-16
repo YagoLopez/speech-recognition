@@ -55,15 +55,13 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
 
 
     // INICIALIZACIONES =============================================================================================
-    if(!annyang){
-        alert('El navegador no soporta reconocimiento de voz. Probar con Chrome');
+    if(!annyang || !'speechSynthesis' in window || !'SpeechRecognition' in window){
+        alert('El navegador no soporta reconocimiento o sintesis de voz. Probar con Chrome');
         return;
     }
-
     $scope.annyang = annyang;
     $scope.statusMessage = null;
-    $scope.resultdo = null;
-
+    $scope.toggle = ReconocimientoVoz.toggle;
     ReconocimientoVoz.setLanguage('es-ES');
 
     // COMANDOS ====================================================================================================
@@ -121,12 +119,6 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
         $scope.$apply();
     });
     // FIN EVENTOS =====================================================================================================
-
-
-    $scope.toggle = ReconocimientoVoz.toggle;
-
-    ReconocimientoVoz.start();
-
 
 });
 

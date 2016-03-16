@@ -20,6 +20,7 @@
 	<!-- Component styles -->
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
     <script src="js/modernizr.custom.js"></script>
+    <script src="bower_components/annyang/annyang.js"></script>
     <!--<script src="node_modules/speechkitt/src/speechkitt.js"></script>-->
     <link rel="shortcut icon" href="favicon.ico">
     <title>Reconocimiento de Voz - Demostración</title>
@@ -90,12 +91,11 @@
 	<div class="container" ng-controller="ControladorReconocimientoVoz">
 
         <section class="slider">
+
             <div class="slide slide--current" data-content="content-1">
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
-                        <!--<img class="zoomer__image" src="images/iphone.png" alt="iPhone" />-->
                         <div class="preview">
-                            <!--<img src="images/imac-content-preview.jpg"/>-->
                             <img src="images/88.png"/>
                             <div class="zoomer__area zoomer__area--size-3"></div>
                         </div>
@@ -106,41 +106,47 @@
                     Demostración
                 </h2>
             </div>
+
+
             <div class="slide" data-content="content-2">
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <!--<img src="images/ipad-content-preview.png" alt="iPad Mini app preview" />-->
                             <img src="images/66.png" alt="iPad Mini app preview" />
                             <div class="zoomer__area zoomer__area--size-4"></div>
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span>The Fantastic</span> iPad Mini</h2>
+                <h2 class="slide__title"><span>Ejecución de comandos</span>Por voz</h2>
             </div>
+
+
             <div class="slide" data-content="content-3">
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <!--<img src="images/macbook-content-preview.jpg" alt="MacBook app preview" />-->
-                            <img src="images/66.png" alt="MacBook app preview" />
+                            <img src="images/22.png" alt="MacBook app preview" />
                             <div class="zoomer__area zoomer__area--size-3"></div>
                         </div>
                     </div>
                 </div>
                 <h2 class="slide__title"><span>The Amazing</span> MacBook</h2>
             </div>
+
+
             <div class="slide" data-content="content-4">
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/imac-content-preview.jpg" alt="iMac app preview" />
+                            <img src="images/12.jpg" alt="iMac app preview" />
                             <div class="zoomer__area zoomer__area--size-5"></div>
                         </div>
                     </div>
                 </div>
                 <h2 class="slide__title"><span>The Glorious</span> iMac</h2>
             </div>
+
+
             <div class="slide" data-content="content-5">
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
@@ -152,6 +158,8 @@
                 </div>
                 <h2 class="slide__title"><span>The Fabulous</span> Apple Watch</h2>
             </div>
+
+
             <nav class="slider__nav">
                 <button class="button button--nav-prev">
                     <i class="icon icon--arrow-left"></i>
@@ -166,27 +174,74 @@
                     <span class="text-hidden">Siguiente</span>
                 </button>
             </nav>
+
+
         </section>
 
         <section class="content">
+
             <div class="content__item" id="content-1">
-                <img class="content__item-img rounded-right" src="images/iphone-content.png" alt="Apple Watch Content" />
                 <div class="content__item-inner">
-                    <h2>The iPhone 6</h2>
-                    <h3>Incredible performance for powerful apps</h3>
-                    <p>Built on 64-bit desktop-class architecture, the new A8 chip delivers more power, even while driving a larger display. The M8 motion coprocessor efficiently gathers data from advanced sensors and a new barometer. And with increased battery life, iPhone 6 lets you do more, for longer than ever.</p>
-                    <p><a href="https://www.apple.com/iphone-6/technology/">Learn more about this technology &xrarr;</a></p>
+                    <h2 style="color:#5C5EDC">Reconocimiento de voz</h2>
+                    <p style="color:lightblue">Demostración de reconocimiento de voz para navegadores y Android</p>
+                    <p>Aunque la tecnología "HTML5 Speech API" es un estandar W3C, debido a su reciente aparición
+                        sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología esta demostración
+                        permite ejecutar comandos por voz, introducir texto mediante el habla en lugar del teclado, y
+                        leer texto con voz sintética</p>
+                    <p>Los navegadores de Microsoft (IE, Edge) todavía no implementan esta tecnología por lo que no
+                        son compatibles con esta demostración</p>
+                    <p>La demostración consiste de tres secciones:</p>
+                        <ol style="font-size:14px">
+                            <li class="pad-botm5">Ejecución de comandos por voz</li>
+                            <li class="pad-botm5">Introducción de texto hablado</li>
+                            <li class="pad-botm5">Síntesis de voz</li>
+                        </ol>
+                    <h3>Instrucciones</h3>
+                        <ul style="font-size:14px;">
+                            <li class="pad-botm5">Siempre que se solicite, conceder permiso a la aplicación para que acceda al hardware del micrófono</li>
+                            <li class="pad-botm5">Navegar por las distintas pantallas hasta la sección correspondiente</li>
+                            <li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
+                            <li class="pad-botm5">Situarse en un entorno silencioso</li>
+                            <li class="pad-botm5">Utilizar un tono claro y normal</li>
+                            <li class="pad-botm5">Navegador compatible requerido</li>
+                            <li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
+                                Android por las cuestiones de compatibilidad antes mencionadas
+                            </li>
+                            <li class="pad-botm5">El reconocimiento de voz se realiza mediante un servicio web remoto por lo que se necesita
+                                una conexión de red. Dependiendo del ancho de banda disponible a veces los resultados pueden tardar algunos
+                                segundos en ser obtenidos</li>
+                        </ul>
+                    <!--<p>-->
+                        <!--<a href="https://www.apple.com/iphone-6/technology/">Learn more about this technology &xrarr;</a>-->
+                    <!--</p>-->
                 </div>
             </div>
-            <div class="content__item" id="content-2">
-                <img class="content__item-img rounded-right" src="images/ipad-content.jpg" alt="iPad Mini Content" />
-                <div class="content__item-inner">
-                    <h2>The iPad Mini</h2>
-                    <h3>Desktop-class architecture without a desktop</h3>
-                    <p>Don’t let its size fool you. iPad mini 3 is powered by an A7 chip with 64-bit desktop-class architecture. A7 delivers amazing processing power without sacriﬁcing battery life. So you get incredible performance in a device you can take with you wherever you go.</p>
-                    <p><a href="https://www.apple.com/ipad-mini-3/performance/">Learn more about Performance &xrarr;</a></p>
+
+            <div class="content__item" id="content-2" style="width:100%">
+                <div class="content__item-inner" style="width:100%">
+                    <!-- Control voz =============================================================================== -->
+                    <div id="control-voz" style="text-align:center">
+                        <!--<h2>Ejecución de comandos por voz</h2>-->
+                        <h3 style="text-align:left">Ejecución de comandos por voz</h3>
+                        <ul style="text-align:left">
+                            <li class="pad-botm5">
+                                <b style="color:lightskyblue">Siguiente:</b> navega a la página siguiente</li>
+                            <li class="pad-botm5">
+                                <b style="color:lightskyblue">Detener Voz:</b> detiene el motor de reconocimiento de voz</li>
+                            <li class="pad-botm5">Pulsar el micrófono para activar/desactivar el reconocimiento de voz</li>
+                        </ul>
+                        <a href="#" ng-click="toggle()" style="display:block">
+                            <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
+                               style="font-size:100px;color:lawngreen;padding:50px;"></i>
+                            <i ng-if="!annyang.isListening()" class="ion-android-microphone-off"
+                               style="font-size:100px;color:red;padding:50px"></i>
+                        </a>
+                        <div ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
+                    </div>
+                    <!-- Fin control voz =========================================================================== -->
                 </div>
             </div>
+
             <div class="content__item" id="content-3">
                 <img class="content__item-img rounded-right" src="images/macbook-content.jpg" alt="MacBook Content" />
                 <div class="content__item-inner">
@@ -196,6 +251,7 @@
                     <p><a href="https://www.apple.com/macbook/design/">Learn more about the design &xrarr;</a></p>
                 </div>
             </div>
+
             <div class="content__item" id="content-4">
                 <img class="content__item-img rounded-right" src="images/imac-content.jpg" alt="iMac Content" />
                 <div class="content__item-inner">
@@ -205,6 +261,7 @@
                     <p><a href="https://www.apple.com/imac/built-in-apps/">Learn more about the iMac's features &xrarr;</a></p>
                 </div>
             </div>
+
             <div class="content__item" id="content-5">
                 <img class="content__item-img rounded-right" src="images/apple-watch-content.png" alt="Apple Watch Content" />
                 <div class="content__item-inner">
@@ -214,9 +271,14 @@
                     <p><a href="https://www.apple.com/watch/new-ways-to-connect/">Learn more about new ways to connect &xrarr;</a></p>
                 </div>
             </div>
-            <button class="button button--close"><i class="icon icon--circle-cross"></i><span class="text-hidden">Close content</span></button>
-        </section>
 
+            <button class="button button--close">
+                <i class="icon icon--circle-cross"></i><span class="text-hidden">Close content</span>
+            </button>
+
+        </section>
+<!-- Control voz =================================================================================================== -->
+<!--
         <div id="control-voz" style="text-align:center;">
             <a href="#" ng-click="toggle()">
                 <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
@@ -226,10 +288,10 @@
             </a>
             <div ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
         </div>
-
+-->
+<!-- Fin control voz =============================================================================================== -->
 
 	</div>
-    <script src="bower_components/annyang/annyang.js"></script>
     <script src="js/classie.js"></script>
 	<script src="js/dynamics.min.js"></script>
 	<script src="js/main.js"></script>
