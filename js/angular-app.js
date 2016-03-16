@@ -21,7 +21,7 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
 
         // Add the commands to annyang
         annyang.addCommands(service.commands);
-        console.debug('added command "' + phrase + '"', service.commands);
+        //console.debug('added command "' + phrase + '"', service.commands);
     };
 
     service.start = function() {
@@ -53,63 +53,16 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
 
 SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope) {
 
+
+    // INICIALIZACIONES =============================================================================================
     if(!annyang){
         alert('El navegador no soporta reconocimiento de voz. Probar con Chrome');
         return;
     }
 
+    $scope.annyang = annyang;
     $scope.statusMessage = null;
     $scope.resultdo = null;
-
-/*
-    var vm = this;
-*/
-
-/*
-    vm.init = function() {
-        //vm.clearResults();
-
-        ReconocimientoVoz.setLanguage('es-ES');
-
-        // COMANDOS ====================================================================================================
-        //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
-        //    console.debug(allSpeech);
-        //    vm.addResult(allSpeech);
-        //});
-        ReconocimientoVoz.addCommand('siguiente', function () {
-            console.log('redirigiendo a dos.html');
-            window.location.href = 'dos.html';
-        });
-        ReconocimientoVoz.addCommand('detener voz', function () {
-         console.log('desactivar voz');
-         annyang.abort();
-         });
-        // FIN COMANDOS ================================================================================================
-
-        ReconocimientoVoz.start();
-    };
-*/
-
-/*
-    vm.addResult = function(result) {
-        vm.results.push({
-            content: result
-            //,
-            //date: new Date()
-        });
-    };
-*/
-
-/*
-    vm.clearResults = function() {
-        vm.results = [];
-    };
-*/
-
-/*
-    vm.init();
-*/
-
 
     ReconocimientoVoz.setLanguage('es-ES');
 
@@ -126,7 +79,6 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
         console.log('desactivar voz');
         annyang.abort();
     });
-    // FIN COMANDOS ================================================================================================
 
     // EVENTOS =========================================================================================================
     annyang.addCallback('start', function () {
@@ -170,7 +122,6 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
     });
     // FIN EVENTOS =====================================================================================================
 
-    $scope.annyang = annyang;
 
     $scope.toggle = ReconocimientoVoz.toggle;
 
