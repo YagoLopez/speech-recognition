@@ -243,3 +243,121 @@ a:hover {
 .pad-botm5 {
     padding-bottom: 15px;
 }
+
+ /*body {*/
+     /*background: #dfdfdf;*/
+     /*padding:0 1em;*/
+ /*}*/
+
+#speechTest {
+    background: #efefef;
+    padding:0.5em 1em;
+    overflow:hidden;
+}
+
+/*h2 {*/
+    /*color:#333;*/
+    /*margin-bottom:0;*/
+/*}*/
+
+/*p {*/
+    /*font-size:0.98em;*/
+    /*margin-bottom:1.8em;*/
+/*}*/
+
+/*p span {*/
+    /*display:block;*/
+    /*font-size:0.7em;*/
+/*}*/
+
+#support {
+    color:red;
+}
+
+#support span {
+    color:#000;
+    margin-top:0.3em;
+}
+
+.browser-support {
+    color:#555;
+    font-size:0.7em;
+    margin-top:0;
+}
+
+.controls {
+    margin:0.8em 0;
+}
+
+input, select, textarea {
+    display:block;
+    margin-bottom:1.2em;
+    /*width: 20em;*/
+    width:100%;
+    heigth:50px;
+}
+
+select, input[type="text"] {
+    padding: 0.9em 1em;
+    font-size: 1em;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    height:50px;
+    background:whitesmoke;
+}
+
+label {
+    font-size:1em;
+    /*color:#003399;*/
+}
+
+select {
+    /*width: 20em;*/
+    /*height:2.5em;*/
+    width:100%;
+    heigth:50px;
+}
+
+input[type="text"] {
+    clear:both;
+    float:left;
+}
+
+textarea{
+    clear:both;
+    float:left;
+    height: 100px;
+    background: aliceblue;
+    font-family: "Avenir", 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size:1em;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 0.9em 1em;
+    font-size: 1.1em;;
+}
+
+.btn {
+    border:none;
+    border-radius:5px;
+    background: cornflowerblue;
+    color:#fff;
+    padding:1em 0.8em;
+    float:left;
+    width:100%;
+    height: 50px;
+}
+
+/*.btn:active, .btn:hover{background:lightskyblue}*/
+/*.btn:visited {background:cornflowerblue}*/
+
+/*html.no-touch #no-touch:hover, #no-touch:active {*/
+    /*opacity: 0.5;*/
+/*}*/

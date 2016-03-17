@@ -88,7 +88,7 @@
 <body ng-app="app-reconocimiento-voz">
 
 	<!-- Main container -->
-	<div class="container" ng-controller="ControladorReconocimientoVoz">
+	<div class="container">
 
         <section class="slider">
 
@@ -103,7 +103,7 @@
                 </div>
                 <h2 class="slide__title">
                     <span>Reconocimiento de voz</span>
-                    Demostración
+                    Instrucciones
                 </h2>
             </div>
 
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span>Ejecución de comandos</span>Por voz</h2>
+                <h2 class="slide__title"><span></span>Ejecución de comandos</h2>
             </div>
 
 
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span>The Amazing</span> MacBook</h2>
+                <h2 class="slide__title"><span></span>Dictado de texto</h2>
             </div>
 
 
@@ -143,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span>The Glorious</span> iMac</h2>
+                <h2 class="slide__title"><span></span>Síntesis de voz</h2>
             </div>
 
 
@@ -182,14 +182,17 @@
 
             <div class="content__item" id="content-1">
                 <div class="content__item-inner">
-                    <h2 style="color:#5C5EDC">Reconocimiento de voz</h2>
+                    <h3 style="color:#5C5EDC">Reconocimiento de voz</h3>
                     <p style="color:lightblue">Demostración de reconocimiento de voz para navegadores y Android</p>
-                    <p>Aunque la tecnología "HTML5 Speech API" es un estandar W3C, debido a su reciente aparición
+                    <p>Aunque la tecnología "HTML5 Web Speech API" es un estandar W3C, debido a su reciente aparición
                         sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología esta demostración
-                        permite ejecutar comandos por voz, introducir texto mediante el habla en lugar del teclado, y
+                        permite ejecutar comandos por voz, introducir texto mediante el habla, y
                         leer texto con voz sintética</p>
                     <p>Los navegadores de Microsoft (IE, Edge) todavía no implementan esta tecnología por lo que no
                         son compatibles con esta demostración</p>
+                    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
+                        Consultar compatibilidad entre navegadores &rarr;
+                    </a></p>
                     <p>La demostración consiste de tres secciones:</p>
                         <ol style="font-size:14px">
                             <li class="pad-botm5">Ejecución de comandos por voz</li>
@@ -211,44 +214,59 @@
                                 una conexión de red. Dependiendo del ancho de banda disponible a veces los resultados pueden tardar algunos
                                 segundos en ser obtenidos</li>
                         </ul>
-                    <!--<p>-->
-                        <!--<a href="https://www.apple.com/iphone-6/technology/">Learn more about this technology &xrarr;</a>-->
-                    <!--</p>-->
                 </div>
             </div>
 
-            <div class="content__item" id="content-2" style="width:100%">
+            <!-- Control voz =============================================================================== -->
+            <div class="content__item" id="content-2" style="width:100%" ng-controller="ControladorReconocimientoVoz">
                 <div class="content__item-inner" style="width:100%">
-                    <!-- Control voz =============================================================================== -->
-                    <div id="control-voz" style="text-align:center">
-                        <!--<h2>Ejecución de comandos por voz</h2>-->
-                        <h3 style="text-align:left">Ejecución de comandos por voz</h3>
-                        <ul style="text-align:left">
-                            <li class="pad-botm5">
-                                <b style="color:lightskyblue">Siguiente:</b> navega a la página siguiente</li>
-                            <li class="pad-botm5">
-                                <b style="color:lightskyblue">Detener Voz:</b> detiene el motor de reconocimiento de voz</li>
-                            <li class="pad-botm5">Pulsar el micrófono para activar/desactivar el reconocimiento de voz</li>
-                        </ul>
+                    <div style="text-align:center;font-size:0.8em">
+                        <h3 style="color:#5C5EDC" class="pad-botm5">Ejecución de comandos por voz</h3>
+                        <div style="text-align:left">
+                        <p><b style="color:lightskyblue">
+                            &bull; Pulsar el micrófono:</b> activar/desactivar el reconocimiento de voz</p>
+                        <p><b style="color:lightskyblue">
+                            &bull; "Siguiente":</b> navega a la página siguiente</p>
+                        <p><b style="color:lightskyblue">
+                            &bull; "Detener Voz":</b> detiene el reconocimiento de voz</p>
+                        </div>
                         <a href="#" ng-click="toggle()" style="display:block">
                             <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
                                style="font-size:100px;color:lawngreen;padding:50px;"></i>
                             <i ng-if="!annyang.isListening()" class="ion-android-microphone-off"
                                style="font-size:100px;color:red;padding:50px"></i>
                         </a>
-                        <div ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
+                        <div style="font-size:small" ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
                     </div>
-                    <!-- Fin control voz =========================================================================== -->
                 </div>
             </div>
+            <!-- Fin control voz =========================================================================== -->
 
-            <div class="content__item" id="content-3">
-                <img class="content__item-img rounded-right" src="images/macbook-content.jpg" alt="MacBook Content" />
-                <div class="content__item-inner">
+            <div class="content__item" id="content-3" ng-controller="speechCtrl" style="width:100%;">
+                <div class="content__item-inner" style="min-width:100%">
                     <h2>The MacBook</h2>
                     <h3>It's the future of the notebook</h3>
-                    <p>With the new MacBook, we set out to do the impossible: engineer a full-size experience into the lightest and most compact Mac notebook ever. That meant reimagining every element to make it not only lighter and thinner but also better. The result is more than just a new notebook. It's the future of the notebook.</p>
-                    <p><a href="https://www.apple.com/macbook/design/">Learn more about the design &xrarr;</a></p>
+                    <form ng-submit="submitEntry()">
+                        <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
+                            <option value="">Choose Accent</option>
+                        </select>
+                        <div class="controls">
+                            <label>Pitch: {{ pitch }}</label>
+                            <input type="range" ng-model="pitch" min="0" max="2" step="1" />
+
+                            <label>Rate: {{ rate }}</label>
+                            <input type="range" ng-model="rate" min="0.1" max="10" step="0.1" />
+
+                            <label>Volume: {{ volume }}</label>
+                            <input type="range" ng-model="volume" min="0" max="1" step="1" />
+                        </div>
+                        <p style="font-size:0.9em;text-align:center">
+                            Dependiendo del los idiomas disponibles y el dispositvo, el tipo de voz y los demás controles
+                            pueden no tener efecto</p>
+                        <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
+                        <button class="btn">Say What?</button>
+                    </form>
+                    <!--<p><a href="https://www.apple.com/macbook/design/">Learn more about the design &xrarr;</a></p>-->
                 </div>
             </div>
 
@@ -292,6 +310,7 @@
 <!-- Fin control voz =============================================================================================== -->
 
 	</div>
+
     <script src="js/classie.js"></script>
 	<script src="js/dynamics.min.js"></script>
 	<script src="js/main.js"></script>

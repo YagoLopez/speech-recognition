@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            background: #dfdfdf;
+            padding:0 1em;
+        }
+
+        #speechTest {
+            background: #efefef;
+            padding:0.5em 1em;
+            overflow:hidden;
+        }
+
+        h2 {
+            color:#333;
+            margin-bottom:0;
+        }
+
+        p {
+            font-size:0.98em;
+            margin-bottom:1.8em;
+        }
+
+        p span {
+            display:block;
+            font-size:0.7em;
+        }
+
+        #support {
+            color:red;
+        }
+
+        #support span {
+            color:#000;
+            margin-top:0.3em;
+        }
+
+        .browser-support {
+            color:#555;
+            font-size:0.7em;
+            margin-top:0;
+        }
+
+        .controls {
+            margin:0.8em 0;
+        }
+
+        input, select {
+            display:block;
+            margin-bottom:1.2em;
+            width: 20em;
+        }
+
+        select, input[type="text"] {
+            padding: 0.9em 1em;
+            font-size: 1em;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+            -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+
+        label {
+            font-size:1em;
+            color:#003399;
+        }
+
+        select {
+            width: 20em;
+            height:2.5em;
+        }
+
+        input[type="text"] {
+            clear:both;
+            float:left;
+        }
+
+        .btn {
+            border:none;
+            border-radius:5px;
+            background: #99cc00;
+            color:#fff;
+            padding:1em 0.8em;
+            margin-left:5px;
+            float:left;
+        }
+
+
+    </style>
+    <script src="bower_components/angular/angular.js" type="text/javascript"></script>
+    <script>
+        angular.module('digitalbs.speech', []).
+                factory('speech', function () {
+
+                    if(window.speechSynthesis) {
+                        var msg = new SpeechSynthesisUtterance();
+                    }
+
+                    function getVoices() {
+
+                        window.speechSynthesis.getVoices();
+                        return window.speechSynthesis.getVoices();
+                    }
+
+                    function sayIt(text, config) {
+                        var voices = getVoices();
+
+                        //choose voice. Fallback to default
+                        msg.voice = config && config.voiceIndex ? voices[config.voiceIndex] : voices[0];
+                        msg.volume = config && config.volume ? config.volume : 1;
+                        msg.rate = config && config.rate ? config.rate : 1;
+                        msg.pitch = config && config.pitch ? config.pitch : 1;
+
+                        //message for speech
+                        msg.text = text;
+
+                        speechSynthesis.speak(msg);
+                    }
+
+
+                    return {
+                        sayText: sayIt,
+                        getVoices: getVoices
+                    };
+                });
+
+
+        angular.module('digitalbs.speechSynthesis', ['digitalbs.speech'])
+                .controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($scope, $timeout, speech) {
+                    $scope.support = false;
+                    if(window.speechSynthesis) {
+                        $scope.support = true;
+
+                        $timeout(function () {
+                            $scope.voices = speech.getVoices();
+                        }, 500);
+                    }
+
+                    $scope.pitch = 1;
+                    $scope.rate = 1;
+                    $scope.volume = 1;
+
+                    $scope.submitEntry = function () {
+                        var voiceIdx = $scope.voices.indexOf($scope.optionSelected),
+                                config = {
+                                    voiceIndex: voiceIdx,
+                                    rate: $scope.rate,
+                                    pitch: $scope.pitch,
+                                    volume: $scope.volume
+                                };
+
+                        if(window.speechSynthesis) {
+                            speech.sayText($scope.msg, config);
+                        }
+                    }
+                }]);
+    </script>
+</head>
+<body>
+<div id="speechTest" ng-app="digitalbs.speechSynthesis" ng-controller="speechCtrl">
+    <h2>Speech Synthesis with Angular</h2>
+    <p class="browser-support">Current Browser Support: Chrome Canary, Safari 7, Nightly Firefox</p>
+
+    <p>Get creative with the pitch, volume and rate to get a different result. <span class="legal">(Pitch, volume and rate do not work on all accents)</span></p>
+
+
+    <form ng-submit="submitEntry()">
+        <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
+            <option value="">Choose Accent</option>
+        </select>
+        <div class="controls">
+            <label>Pitch: {{ pitch }}</label>
+            <input type="range" ng-model="pitch" min="0" max="2" step="1" />
+
+            <label>Rate: {{ rate }}</label>
+            <input type="range" ng-model="rate" min="0.1" max="10" step="0.1" />
+
+            <label>Volume: {{ volume }}</label>
+            <input type="range" ng-model="volume" min="0" max="1" step="1" />
+        </div>
+
+        <input ng-model="msg" type="text" placeholder="Enter here"/>
+        <button class="btn">Say What?</button>
+    </form>
+
+</div>
+</body>
+</html>

@@ -23,7 +23,6 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
         annyang.addCommands(service.commands);
         //console.debug('added command "' + phrase + '"', service.commands);
     };
-
     service.start = function() {
         annyang.addCommands(service.commands);
         annyang.debug(false);
@@ -31,11 +30,9 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
         console.debug('annyang', annyang);
         console.debug('SpeechRecognizer', annyang.getSpeechRecognizer());
     };
-
     service.setLanguage = function (codigoLenguage) {
         annyang.setLanguage(codigoLenguage); // 'es-ES' -> spanish
     };
-
     service.toggle = function () {
       if(annyang.isListening()) {
           annyang.abort();
@@ -50,21 +47,21 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
 
     return service;
 });
-
+// =====================================================================================================================
 SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope) {
 
 
-    // INICIALIZACIONES =============================================================================================
+    // INICIALIZACIONES ------------------------------------------------------------------------------------------------
     if(!annyang || !'speechSynthesis' in window || !'SpeechRecognition' in window){
         alert('El navegador no soporta reconocimiento o sintesis de voz. Probar con Chrome');
         return;
     }
-    $scope.annyang = annyang;
-    $scope.statusMessage = null;
-    $scope.toggle = ReconocimientoVoz.toggle;
     ReconocimientoVoz.setLanguage('es-ES');
+    $scope.annyang = annyang;
+    $scope.statusMessage = 'Reconocimiento de voz desactivado';
+    $scope.toggle = ReconocimientoVoz.toggle;
 
-    // COMANDOS ====================================================================================================
+    // COMANDOS --------------------------------------------------------------------------------------------------------
     //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
     //    console.debug(allSpeech);
     //    vm.addResult(allSpeech);
@@ -78,10 +75,9 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
         annyang.abort();
     });
 
-    // EVENTOS =========================================================================================================
+    // EVENTOS ---------------------------------------------------------------------------------------------------------
     annyang.addCallback('start', function () {
         $scope.statusMessage = 'Esperando comando de voz...';
-        $scope.escuchando = true;
         $scope.$apply();
     });
     //annyang.addCallback('error', function () {
@@ -100,8 +96,7 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
         $scope.$apply();
     });
     annyang.addCallback('end', function () {
-        $scope.escuchando = false;
-        $scope.statusMessage = '<span>Reconocimiento de voz desactivado</span>';
+        $scope.statusMessage = 'Reconocimiento de voz desactivado';
         $scope.$apply();
     });
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
@@ -114,14 +109,80 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
     annyang.addCallback('resultNoMatch', function (res) {
         console.log('Texto reconocido pero no asociado a ningun comando:', res);
         $scope.statusMessage = res[0];
-        //$scope.comando = 'No hay funcion asociada al texto hablado. ' +
-        //    'Texto similar: '+res[1];
         $scope.$apply();
     });
-    // FIN EVENTOS =====================================================================================================
+    // FIN EVENTOS -----------------------------------------------------------------------------------------------------
 
 });
+// =====================================================================================================================
+SpeechApp.factory('speech', function () {
 
+     //Deteccion de sintetizador de voz
+    if(window.speechSynthesis) {
+        var msg = new SpeechSynthesisUtterance();
+    } else {
+        alert('El navegador no soporta síntesis de voz');
+        return;
+    }
+
+    function getVoices() {
+        window.speechSynthesis.getVoices();
+        return window.speechSynthesis.getVoices();
+    }
+
+    function sayIt(text, config) {
+        var voices = getVoices();
+
+        //choose voice. Fallback to default
+        msg.voice = config && config.voiceIndex ? voices[config.voiceIndex] : voices[0];
+        msg.volume = config && config.volume ? config.volume : 1;
+        msg.rate = config && config.rate ? config.rate : 1;
+        msg.pitch = config && config.pitch ? config.pitch : 1;
+
+        //message for speech
+        msg.text = text;
+
+        speechSynthesis.speak(msg);
+    }
+
+    return {
+        sayText: sayIt,
+        getVoices: getVoices
+    };
+});
+// =====================================================================================================================
+SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($scope, $timeout, speech) {
+
+    $scope.support = false;
+    if(window.speechSynthesis) {
+        $scope.support = true;
+
+        $timeout(function () {
+            $scope.voices = speech.getVoices();
+        }, 500);
+    }
+
+    $scope.pitch = 1;
+    $scope.rate = 1;
+    $scope.volume = 1;
+    $scope.msg = 'En un lugar de la mancha';
+
+    $scope.submitEntry = function () {
+        var voiceIdx = $scope.voices.indexOf($scope.optionSelected);
+        var config = {
+                voiceIndex: voiceIdx,
+                rate: $scope.rate,
+                pitch: $scope.pitch,
+                volume: $scope.volume
+            };
+
+        //if(window.speechSynthesis) {
+            console.log('hablando...', $scope.msg);
+            speech.sayText($scope.msg, config);
+        //}
+    }
+}]);
+// =====================================================================================================================
 SpeechApp.filter('FiltroHtml', ['$sce', function($sce) {
     return function(value, type) {
         return $sce.trustAs(type || 'html', value);
