@@ -57,9 +57,11 @@ body {
 
 a {
 	text-decoration: none;
-	color: #5C5EDC;
+	color: fuchsia;
 	outline: none;
 }
+
+a:visited{color:mediumorchid}
 
 a:focus {
 	color: #ddd;
@@ -361,8 +363,4 @@ textarea{
     padding-right:5px;
 }
 .btn:active{background:lightskyblue}
-/*.btn:visited {background:cornflowerblue}*/
 
-/*html.no-touch #no-touch:hover, #no-touch:active {*/
-    /*opacity: 0.5;*/
-/*}*/

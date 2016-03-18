@@ -121,7 +121,7 @@ SpeechApp.factory('speech', function () {
     if(window.speechSynthesis) {
         var msg = new SpeechSynthesisUtterance();
     } else {
-        alert('El navegador no soporta sÌntesis de voz');
+        alert('El navegador no soporta s√≠ntesis de voz');
         return;
     }
 
@@ -165,9 +165,10 @@ SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($s
     $scope.pitch = 1;
     $scope.rate = 1;
     $scope.volume = 1;
-    $scope.msg = 'La paradoja de EpimÈnides dice lo siguiente: "Esta frase es falsa.\n\n' +
-        'Si es cierto que la frase es falsa, implica contradicciÛn. Por el contrario, si es falso, ' +
-        'entonces la sentencia es cierta, lo que tambiÈn implica contradicciÛn';
+    $scope.msg = 'La paradoja de Epim√©nides dice lo siguiente: "Esta frase es falsa".\n\n' +
+        'Si la frase es verdadera se contradice a s√≠ misma, lo que  implica contradicci√≥n. ' +
+        'Por el contrario, si la frase es falsa, entonces su enunciado es verdadero, ' +
+        'lo que tambi√©n implica contradicci√≥n';
 
     $scope.submitEntry = function () {
         var voiceIdx = $scope.voices.indexOf($scope.optionSelected);

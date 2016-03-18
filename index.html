@@ -1,7 +1,4 @@
-<!--todo: primera pagina de presentacion-->
-<!--todo: segunda pagina demostracion de comandos-->
-<!--todo: tercera pagina introduccion de texto en controles de texto-->
-<!--todo: recomendaciones: 1) distancia menor a 10 cms de microfono 2) Entorno no ruidoso 3) tono claro y normal-->
+<!--todo: pagina introduccion de texto largo-->
 <!DOCTYPE html>
 <html lang="es" class="no-js">
 <head>
@@ -118,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span></span>Ejecución de comandos</h2>
+                <h2 class="slide__title"><span>Ejecución de comandos</span>por voz</h2>
             </div>
 
 
@@ -131,7 +128,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span></span>Síntesis de voz</h2>
+                <h2 class="slide__title"><span>Síntesis</span>de voz</h2>
             </div>
 
 
@@ -187,27 +184,28 @@
             <div class="content__item" id="content-1">
                 <div class="content__item-inner">
                     <img class="content__item-img animated" src="images/4.jpg" alt="iMac Content" />
-                    <h3 style="color:#5C5EDC">Reconocimiento de voz</h3>
+                    <h3>Reconocimiento de voz</h3>
                     <p style="color:lightblue">Demostración  para navegadores compatibles y Android</p>
-                    <p>Aunque la tecnología "HTML5 Web Speech API" es un estandar W3C, debido a su reciente aparición
-                        sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología esta demostración
-                        permite ejecutar comandos por voz, introducir texto mediante el habla, y
-                        leer texto con voz sintética</p>
+                    <p>Aunque la tecnología "HTML5 Web Speech API" es un estandar W3C, debido a su reciente aparición,
+                        sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología, esta demostración
+                        permite interactuar con el software de distintas maneras: ejecutando comandos por voz,
+                        introduciendo texto mediante el habla, y convirtiendo texto a voz mediante habla sintética</p>
                     <p>Los navegadores de Microsoft (IE, Edge) no son compatibles con esta aplicación</p>
                     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
                         Consultar compatibilidad entre navegadores &rarr;
                     </a></p>
-                    <p>Esta demostración consiste de tres secciones:</p>
+                    <p>La demostración está dividida en tres secciones:</p>
                     <ol style="font-size:14px">
                         <li class="pad-botm5">Ejecución de comandos por voz</li>
-                        <li class="pad-botm5">Introducción de texto hablado</li>
                         <li class="pad-botm5">Síntesis de voz</li>
+                        <li class="pad-botm5">Introducción de texto hablado</li>
                     </ol>
+                    <p>Se puede acceder a cada sección navegando con las flechas por las distintas pantallas hasta llegar
+                        a la sección elegida</p>
                     <h3>Instrucciones</h3>
                     <ul style="font-size:14px;">
                         <li class="pad-botm5">Siempre que se solicite, conceder permiso a la aplicación para que
                             acceda al hardware del micrófono</li>
-                        <li class="pad-botm5">Navegar por las distintas pantallas hasta la sección correspondiente</li>
                         <li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
                         <li class="pad-botm5">Situarse en un entorno silencioso</li>
                         <li class="pad-botm5">Utilizar un tono claro y normal</li>
@@ -223,11 +221,11 @@
             </div>
             <!-- Fin instrucciones ================================================================================= -->
 
-            <!-- Reconocimiento  voz =============================================================================== -->
+            <!-- Reconocimiento voz =============================================================================== -->
             <div class="content__item" id="content-2" style="width:100%" ng-controller="ControladorReconocimientoVoz">
                 <div class="content__item-inner" style="width:100%">
                     <div style="text-align:center;font-size:0.8em">
-                        <h3 style="color:#5C5EDC" class="pad-botm5">Ejecución de comandos por voz</h3>
+                        <h3 class="pad-botm5">Ejecución de comandos por voz</h3>
                         <div style="margin:auto">
                         <p><b style="color:lightskyblue">
                             <i class="ion-ios-mic comand"></i>
@@ -252,7 +250,7 @@
             <!-- Fin reconocimiento voz ============================================================================ -->
 
             <!-- Síntesis voz ====================================================================================== -->
-            <div class="content__item" id="content-3" ng-controller="speechCtrl" style="width:100%">
+            <div class="content__item" id="content-3" style="width:100%" ng-controller="speechCtrl">
                 <div class="content__item-inner" style="min-width:100%">
                     <h3>Síntesis de voz</h3>
                     <form ng-submit="submitEntry()">
@@ -289,7 +287,6 @@
                 </div>
             </div>
 
-<!--
             <div class="content__item" id="content-5">
                 <img class="content__item-img rounded-right" src="images/apple-watch-content.png" alt="Apple Watch Content" />
                 <div class="content__item-inner">
@@ -299,7 +296,6 @@
                     <p><a href="https://www.apple.com/watch/new-ways-to-connect/">Learn more about new ways to connect &xrarr;</a></p>
                 </div>
             </div>
--->
 
             <button class="button button--close">
                 <i class="icon icon--circle-cross"></i><span class="text-hidden">Cerrar contenido</span>
