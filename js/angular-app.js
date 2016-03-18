@@ -115,7 +115,7 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
 
 });
 // =====================================================================================================================
-SpeechApp.factory('speech', function () {
+SpeechApp.service('speech', function () {
 
      //Deteccion de sintetizador de voz
     if(window.speechSynthesis) {
@@ -125,12 +125,11 @@ SpeechApp.factory('speech', function () {
         return;
     }
 
-    function getVoices() {
-        window.speechSynthesis.getVoices();
+    this.getVoices = function() {
         return window.speechSynthesis.getVoices();
-    }
-    function sayIt(text, config) {
-        var voices = getVoices();
+    };
+    this.sayText = function(text, config) {
+        var voices = this.getVoices();
 
         //choose voice. Fallback to default
         msg.voice = config && config.voiceIndex ? voices[config.voiceIndex] : voices[0];
@@ -142,18 +141,12 @@ SpeechApp.factory('speech', function () {
         msg.text = text;
 
         speechSynthesis.speak(msg);
-    }
-    function cancel() {
+    };
+    this.cancel = function() {
         speechSynthesis.cancel();
-    }
-    function isTalking() {
+    };
+    this.isTalking = function() {
         return speechSynthesis.speaking;
-    }
-    return {
-        sayText: sayIt,
-        getVoices: getVoices ,
-        cancel: cancel,
-        isTalking: isTalking
     };
 });
 // =====================================================================================================================
@@ -189,6 +182,7 @@ SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($s
     };
 
     $scope.speech = speech;
+
 }]);
 // =====================================================================================================================
 SpeechApp.filter('FiltroHtml', ['$sce', function($sce) {

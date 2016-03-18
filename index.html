@@ -253,7 +253,7 @@
             <div class="content__item" id="content-3" style="width:100%" ng-controller="speechCtrl">
                 <div class="content__item-inner" style="min-width:100%">
                     <h3>Síntesis de voz</h3>
-                    <form ng-submit="submitEntry()">
+                    <form>
                         <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
                             <option value="">Escoger idioma</option>
                         </select>
@@ -271,19 +271,20 @@
                             o no en el sistema operatvo. El control del tono y la velocidad no está soportado en todas
                             las voces</p>
                         <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
-                        <button class="btn" style="width:50%;text-align:center;padding:5px">Hablar texto</button>
-                        <a ng-click="cancel()" style="width:50%;text-align:center">Cancelar</a>
+                        <!--<button class="btn" style="width:50%;text-align:center;padding:5px">Hablar texto</button>-->
+                        <!--<a ng-click="cancel()" style="width:50%;text-align:center">Cancelar</a>-->
                         <table>
                             <tr>
-                                <td><button><i class="ion-ios-play-outline"></i> Reproducir</button></td>
                                 <td>
-                                    <button class="btn" ng-click="speech.cancel()">
-                                        <i class="ion-ios-pause"></i> Detener
-                                        <!--<i ng-if="!speech.speaking" class="ion-ios-pause"></i>-->
+                                    <button ng-click="submitEntry()" ng-if="!speech.isTalking()" class="btn">
+                                        <i class="ion-ios-play"></i>
+                                    </button>
+                                    <button ng-click="speech.cancel()" ng-if="speech.isTalking()" class="btn">
+                                        <i class="ion-stop animated fadeIn infinite" style="color:cyan;"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <i class=""></i>speech.speaking: {{ speech.isTalking()  }}
+                                    <i class=""></i>speaking: {{ speech.isTalking()  }}
                                 </td>
                                 <td><i class=""></i></td>
                             </tr>
