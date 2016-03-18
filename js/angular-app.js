@@ -129,7 +129,6 @@ SpeechApp.factory('speech', function () {
         window.speechSynthesis.getVoices();
         return window.speechSynthesis.getVoices();
     }
-
     function sayIt(text, config) {
         var voices = getVoices();
 
@@ -144,10 +143,17 @@ SpeechApp.factory('speech', function () {
 
         speechSynthesis.speak(msg);
     }
-
+    function cancel() {
+        speechSynthesis.cancel();
+    }
+    function isTalking() {
+        return speechSynthesis.speaking;
+    }
     return {
         sayText: sayIt,
-        getVoices: getVoices
+        getVoices: getVoices ,
+        cancel: cancel,
+        isTalking: isTalking
     };
 });
 // =====================================================================================================================
@@ -159,7 +165,7 @@ SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($s
 
         $timeout(function () {
             $scope.voices = speech.getVoices();
-        }, 500);
+        }, 200);
     }
 
     $scope.pitch = 1;
@@ -178,12 +184,11 @@ SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($s
                 pitch: $scope.pitch,
                 volume: $scope.volume
             };
+        console.log(window.speechSynthesis);
+        speech.sayText($scope.msg, config);
+    };
 
-        //if(window.speechSynthesis) {
-            console.log('hablando...', $scope.msg);
-            speech.sayText($scope.msg, config);
-        //}
-    }
+    $scope.speech = speech;
 }]);
 // =====================================================================================================================
 SpeechApp.filter('FiltroHtml', ['$sce', function($sce) {

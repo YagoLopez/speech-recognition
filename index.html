@@ -268,10 +268,26 @@
                         <p style="font-size:0.9em;text-align:center">
                             Nota: Sólo compatible con teléfonos Android. En estos teléfonos,
                             los lenguajes disonibles dependen de si se hallan instalados
-                            o no en el sistema operatvo. El control del tono y la velocidad también varía respecto al uso de un
-                            navedgador de escritorio y puede no ser efectivo</p>
+                            o no en el sistema operatvo. El control del tono y la velocidad no está soportado en todas
+                            las voces</p>
                         <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
-                        <button class="btn">Hablar texto</button>
+                        <button class="btn" style="width:50%;text-align:center;padding:5px">Hablar texto</button>
+                        <a ng-click="cancel()" style="width:50%;text-align:center">Cancelar</a>
+                        <table>
+                            <tr>
+                                <td><button><i class="ion-ios-play-outline"></i> Reproducir</button></td>
+                                <td>
+                                    <button class="btn" ng-click="speech.cancel()">
+                                        <i class="ion-ios-pause"></i> Detener
+                                        <!--<i ng-if="!speech.speaking" class="ion-ios-pause"></i>-->
+                                    </button>
+                                </td>
+                                <td>
+                                    <i class=""></i>speech.speaking: {{ speech.isTalking()  }}
+                                </td>
+                                <td><i class=""></i></td>
+                            </tr>
+                        </table>
                     </form>
                 </div>
             </div>
