@@ -90,6 +90,7 @@
 	<!-- Main container -->
 	<div class="container">
 
+        <!-- Slider ================================================================================================ -->
         <section class="slider">
 
             <div class="slide slide--current" data-content="content-1">
@@ -130,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="slide__title"><span></span>Dictado de texto</h2>
+                <h2 class="slide__title"><span></span>Síntesis de voz</h2>
             </div>
 
 
@@ -159,7 +160,7 @@
                 <h2 class="slide__title"><span>The Fabulous</span> Apple Watch</h2>
             </div>
 
-
+            <!-- Navegación entre Slider ======================================================================== -->
             <nav class="slider__nav">
                 <button class="button button--nav-prev">
                     <i class="icon icon--arrow-left"></i>
@@ -174,61 +175,69 @@
                     <span class="text-hidden">Siguiente</span>
                 </button>
             </nav>
-
+            <!-- Fin navegación entre Slider ==================================================================== -->
 
         </section>
+        <!-- Fin Slider ============================================================================================ -->
 
+        <!-- Contenido ============================================================================================= -->
         <section class="content">
 
+            <!-- Instrucciones ===================================================================================== -->
             <div class="content__item" id="content-1">
                 <div class="content__item-inner">
+                    <img class="content__item-img animated" src="images/4.jpg" alt="iMac Content" />
                     <h3 style="color:#5C5EDC">Reconocimiento de voz</h3>
-                    <p style="color:lightblue">Demostración de reconocimiento de voz para navegadores y Android</p>
+                    <p style="color:lightblue">Demostración  para navegadores compatibles y Android</p>
                     <p>Aunque la tecnología "HTML5 Web Speech API" es un estandar W3C, debido a su reciente aparición
                         sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología esta demostración
                         permite ejecutar comandos por voz, introducir texto mediante el habla, y
                         leer texto con voz sintética</p>
-                    <p>Los navegadores de Microsoft (IE, Edge) todavía no implementan esta tecnología por lo que no
-                        son compatibles con esta demostración</p>
+                    <p>Los navegadores de Microsoft (IE, Edge) no son compatibles con esta aplicación</p>
                     <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
                         Consultar compatibilidad entre navegadores &rarr;
                     </a></p>
-                    <p>La demostración consiste de tres secciones:</p>
-                        <ol style="font-size:14px">
-                            <li class="pad-botm5">Ejecución de comandos por voz</li>
-                            <li class="pad-botm5">Introducción de texto hablado</li>
-                            <li class="pad-botm5">Síntesis de voz</li>
-                        </ol>
+                    <p>Esta demostración consiste de tres secciones:</p>
+                    <ol style="font-size:14px">
+                        <li class="pad-botm5">Ejecución de comandos por voz</li>
+                        <li class="pad-botm5">Introducción de texto hablado</li>
+                        <li class="pad-botm5">Síntesis de voz</li>
+                    </ol>
                     <h3>Instrucciones</h3>
-                        <ul style="font-size:14px;">
-                            <li class="pad-botm5">Siempre que se solicite, conceder permiso a la aplicación para que acceda al hardware del micrófono</li>
-                            <li class="pad-botm5">Navegar por las distintas pantallas hasta la sección correspondiente</li>
-                            <li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
-                            <li class="pad-botm5">Situarse en un entorno silencioso</li>
-                            <li class="pad-botm5">Utilizar un tono claro y normal</li>
-                            <li class="pad-botm5">Navegador compatible requerido</li>
-                            <li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
-                                Android por las cuestiones de compatibilidad antes mencionadas
-                            </li>
-                            <li class="pad-botm5">El reconocimiento de voz se realiza mediante un servicio web remoto por lo que se necesita
-                                una conexión de red. Dependiendo del ancho de banda disponible a veces los resultados pueden tardar algunos
-                                segundos en ser obtenidos</li>
-                        </ul>
-                </div>
+                    <ul style="font-size:14px;">
+                        <li class="pad-botm5">Siempre que se solicite, conceder permiso a la aplicación para que
+                            acceda al hardware del micrófono</li>
+                        <li class="pad-botm5">Navegar por las distintas pantallas hasta la sección correspondiente</li>
+                        <li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
+                        <li class="pad-botm5">Situarse en un entorno silencioso</li>
+                        <li class="pad-botm5">Utilizar un tono claro y normal</li>
+                        <li class="pad-botm5">Navegador compatible requerido</li>
+                        <li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
+                            Android por las cuestiones de compatibilidad antes mencionadas
+                        </li>
+                        <li class="pad-botm5">El reconocimiento de voz se realiza mediante un servicio web remoto
+                            por lo que se necesita una conexión de red. Dependiendo del ancho de banda disponible
+                            a veces los resultados pueden tardar algunos segundos en ser obtenidos</li>
+                    </ul>
+                 </div>
             </div>
+            <!-- Fin instrucciones ================================================================================= -->
 
-            <!-- Control voz =============================================================================== -->
+            <!-- Reconocimiento  voz =============================================================================== -->
             <div class="content__item" id="content-2" style="width:100%" ng-controller="ControladorReconocimientoVoz">
                 <div class="content__item-inner" style="width:100%">
                     <div style="text-align:center;font-size:0.8em">
                         <h3 style="color:#5C5EDC" class="pad-botm5">Ejecución de comandos por voz</h3>
-                        <div style="text-align:left">
+                        <div style="margin:auto">
                         <p><b style="color:lightskyblue">
-                            &bull; Pulsar el micrófono:</b> activar/desactivar el reconocimiento de voz</p>
+                            <i class="ion-ios-mic comand"></i>
+                            Pulsar el micrófono</b> Activa/desactiva el reconocimiento de voz</p>
                         <p><b style="color:lightskyblue">
-                            &bull; "Siguiente":</b> navega a la página siguiente</p>
+                            <i class="ion-chatbubble-working comand"></i>
+                            "Siguiente"</b> Navega a la página siguiente</p>
                         <p><b style="color:lightskyblue">
-                            &bull; "Detener Voz":</b> detiene el reconocimiento de voz</p>
+                            <i class="ion-chatbubble-working comand"></i>
+                            "Detener Voz"</b> Detiene el reconocimiento de voz</p>
                         </div>
                         <a href="#" ng-click="toggle()" style="display:block">
                             <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
@@ -240,35 +249,35 @@
                     </div>
                 </div>
             </div>
-            <!-- Fin control voz =========================================================================== -->
+            <!-- Fin reconocimiento voz ============================================================================ -->
 
-            <div class="content__item" id="content-3" ng-controller="speechCtrl" style="width:100%;">
+            <!-- Síntesis voz ====================================================================================== -->
+            <div class="content__item" id="content-3" ng-controller="speechCtrl" style="width:100%">
                 <div class="content__item-inner" style="min-width:100%">
-                    <h2>The MacBook</h2>
-                    <h3>It's the future of the notebook</h3>
+                    <h3>Síntesis de voz</h3>
                     <form ng-submit="submitEntry()">
                         <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
-                            <option value="">Choose Accent</option>
+                            <option value="">Escoger idioma</option>
                         </select>
                         <div class="controls">
-                            <label>Pitch: {{ pitch }}</label>
+                            <label>Tono: {{ pitch }}</label>
                             <input type="range" ng-model="pitch" min="0" max="2" step="1" />
-
-                            <label>Rate: {{ rate }}</label>
+                            <label>Velocidad: {{ rate }}</label>
                             <input type="range" ng-model="rate" min="0.1" max="10" step="0.1" />
-
-                            <label>Volume: {{ volume }}</label>
-                            <input type="range" ng-model="volume" min="0" max="1" step="1" />
+                            <!--<label>Volume: {{ volume }}</label>-->
+                            <!--<input type="range" ng-model="volume" min="0" max="1" step="1" />-->
                         </div>
                         <p style="font-size:0.9em;text-align:center">
-                            Dependiendo del los idiomas disponibles y el dispositvo, el tipo de voz y los demás controles
-                            pueden no tener efecto</p>
+                            Nota: Sólo compatible con teléfonos Android. En estos teléfonos,
+                            los lenguajes disonibles dependen de si se hallan instalados
+                            o no en el sistema operatvo. El control del tono y la velocidad también varía respecto al uso de un
+                            navedgador de escritorio y puede no ser efectivo</p>
                         <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
-                        <button class="btn">Say What?</button>
+                        <button class="btn">Hablar texto</button>
                     </form>
-                    <!--<p><a href="https://www.apple.com/macbook/design/">Learn more about the design &xrarr;</a></p>-->
                 </div>
             </div>
+            <!-- Fin síntesis voz ================================================================================== -->
 
             <div class="content__item" id="content-4">
                 <img class="content__item-img rounded-right" src="images/imac-content.jpg" alt="iMac Content" />
@@ -280,6 +289,7 @@
                 </div>
             </div>
 
+<!--
             <div class="content__item" id="content-5">
                 <img class="content__item-img rounded-right" src="images/apple-watch-content.png" alt="Apple Watch Content" />
                 <div class="content__item-inner">
@@ -289,25 +299,14 @@
                     <p><a href="https://www.apple.com/watch/new-ways-to-connect/">Learn more about new ways to connect &xrarr;</a></p>
                 </div>
             </div>
+-->
 
             <button class="button button--close">
-                <i class="icon icon--circle-cross"></i><span class="text-hidden">Close content</span>
+                <i class="icon icon--circle-cross"></i><span class="text-hidden">Cerrar contenido</span>
             </button>
 
         </section>
-<!-- Control voz =================================================================================================== -->
-<!--
-        <div id="control-voz" style="text-align:center;">
-            <a href="#" ng-click="toggle()">
-                <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
-                   style="font-size:100px;color:lawngreen;vertical-align: middle;padding:5px"></i>
-                <i ng-if="!annyang.isListening()" class="ion-android-microphone-off"
-                   style="font-size:100px;color:red;vertical-align: middle;padding:5px"></i>
-            </a>
-            <div ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
-        </div>
--->
-<!-- Fin control voz =============================================================================================== -->
+        <!-- Fin contenido ========================================================================================= -->
 
 	</div>
 

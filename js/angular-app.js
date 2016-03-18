@@ -77,7 +77,7 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
 
     // EVENTOS ---------------------------------------------------------------------------------------------------------
     annyang.addCallback('start', function () {
-        $scope.statusMessage = 'Esperando comando de voz...';
+        $scope.statusMessage = 'Esperando comandos de voz...';
         $scope.$apply();
     });
     //annyang.addCallback('error', function () {
@@ -165,7 +165,9 @@ SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($s
     $scope.pitch = 1;
     $scope.rate = 1;
     $scope.volume = 1;
-    $scope.msg = 'En un lugar de la mancha';
+    $scope.msg = 'La paradoja de Epiménides dice lo siguiente: "Esta frase es falsa.\n\n' +
+        'Si es cierto que la frase es falsa, implica contradicción. Por el contrario, si es falso, ' +
+        'entonces la sentencia es cierta, lo que también implica contradicción';
 
     $scope.submitEntry = function () {
         var voiceIdx = $scope.voices.indexOf($scope.optionSelected);
