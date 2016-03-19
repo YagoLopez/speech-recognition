@@ -1,4 +1,5 @@
 <!--todo: pagina introduccion de texto largo-->
+<!--todo: cambiar nombres de speech-->
 <!DOCTYPE html>
 <html lang="es" class="no-js">
 <head>
@@ -271,24 +272,19 @@
                             o no en el sistema operatvo. El control del tono y la velocidad no está soportado en todas
                             las voces</p>
                         <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
-                        <!--<button class="btn" style="width:50%;text-align:center;padding:5px">Hablar texto</button>-->
-                        <!--<a ng-click="cancel()" style="width:50%;text-align:center">Cancelar</a>-->
-                        <table>
+                        <table align="center"style="width:100%">
                             <tr>
                                 <td>
-                                    <button ng-click="submitEntry()" ng-if="!speech.isTalking()" class="btn">
-                                        <i class="ion-ios-play"></i>
-                                    </button>
-                                    <button ng-click="speech.cancel()" ng-if="speech.isTalking()" class="btn">
-                                        <i class="ion-stop animated fadeIn infinite" style="color:cyan;"></i>
+                                    <button ng-click="submitEntry()" class="btn">
+                                        <i class="ion-ios-play"></i> Hablar
                                     </button>
                                 </td>
                                 <td>
-                                    <i class=""></i>speaking: {{ speech.isTalking()  }}
+                                    <button ng-click="speech.cancel()" class="btn"><i class="ion-ios-pause"></i> Detener</button>
                                 </td>
-                                <td><i class=""></i></td>
                             </tr>
                         </table>
+                        <div class="hidden">is talking: {{ speech.isTalking() }}</div>
                     </form>
                 </div>
             </div>

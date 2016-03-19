@@ -1,5 +1,9 @@
 var SpeechApp = angular.module('app-reconocimiento-voz', []);
 
+SpeechApp.config(function ($compileProvider) {
+    $compileProvider.debugInfoEnabled(true);
+});
+// =====================================================================================================================
 SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
 
     var service = {};
@@ -49,7 +53,6 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
 });
 // =====================================================================================================================
 SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope) {
-
 
     // INICIALIZACIONES ------------------------------------------------------------------------------------------------
     if(!annyang || !'speechSynthesis' in window || !'SpeechRecognition' in window){
@@ -118,8 +121,9 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
 SpeechApp.service('speech', function () {
 
      //Deteccion de sintetizador de voz
+    var msg = null;
     if(window.speechSynthesis) {
-        var msg = new SpeechSynthesisUtterance();
+        msg = new SpeechSynthesisUtterance();
     } else {
         alert('El navegador no soporta síntesis de voz');
         return;
@@ -148,6 +152,16 @@ SpeechApp.service('speech', function () {
     this.isTalking = function() {
         return speechSynthesis.speaking;
     };
+    this.pause = function () {
+        speechSynthesis.pause();
+    };
+    this.resume = function () {
+        speechSynthesis.resume();
+    };
+    msg.onend = function () {};
+    msg.onerror = function () {
+        console.error('Error en la síntesis de voz')
+    }
 });
 // =====================================================================================================================
 SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($scope, $timeout, speech) {
