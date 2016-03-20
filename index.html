@@ -1,5 +1,9 @@
 <!--todo: pagina introduccion de texto largo-->
 <!--todo: cambiar nombres de speech-->
+<!--todo: disable debug info-->
+<!--todo: minificar-->
+<!--todo: acciones de voz-->
+<!--todo: averiguar el tiempo: dictar lugar y obtener respuesta hablada. esto podria ir en usa seccion llamada reconocimiento y sintesis-->
 <!DOCTYPE html>
 <html lang="es" class="no-js">
 <head>
@@ -9,21 +13,21 @@
 	<meta name="description" content="A simple content slider with depth-like zoom functionality" />
 	<meta name="keywords" content="reconocimiento de voz, speech recognition, voice recognition, voice control, demo" />
 	<meta name="author" content="Yago López Salvador" />
-	<!-- Feather Icons -->
 	<link rel="stylesheet" type="text/css" href="fonts/feather/style.css">
-	<!-- General demo styles & header -->
-	<link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="fonts/google-lato-font.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/ionicons/css/ionicons.css"/>
-	<!-- Component styles -->
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog-theme-plain.css" />
     <script src="js/modernizr.custom.js"></script>
     <script src="bower_components/annyang/annyang.js"></script>
-    <!--<script src="node_modules/speechkitt/src/speechkitt.js"></script>-->
-    <link rel="shortcut icon" href="favicon.ico">
-    <title>Reconocimiento de Voz - Demostración</title>
+    <link rel="shortcut icon" href="images/favicon.png">
+    <title>Reconocimiento  y Síntesis de Voz - Demostración</title>
+<!--
     <script>
-/*        if (annyang) {
+        if (annyang) {
             var commands = {
                 'hola': function() { alert('Hello world!'); },
                 'siguiente': function () {
@@ -79,10 +83,11 @@
 //                    annyang.abort()
 //                } else { annyang.start() }
 //            }
-        }*/
+        }
     </script>
-
+-->
 </head>
+
 <body ng-app="app-reconocimiento-voz">
 
 	<!-- Main container -->
@@ -95,7 +100,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/88.png"/>
+                            <img src="images/88.jpg"/>
                             <div class="zoomer__area zoomer__area--size-3"></div>
                         </div>
                     </div>
@@ -111,7 +116,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/66.png" alt="iPad Mini app preview" />
+                            <img src="images/66.jpg" alt="iPad Mini app preview" />
                             <div class="zoomer__area zoomer__area--size-4"></div>
                         </div>
                     </div>
@@ -124,7 +129,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/22.png" alt="MacBook app preview" />
+                            <img src="images/22.jpg" alt="MacBook app preview" />
                             <div class="zoomer__area zoomer__area--size-3"></div>
                         </div>
                     </div>
@@ -160,15 +165,15 @@
 
             <!-- Navegación entre Slider ======================================================================== -->
             <nav class="slider__nav">
-                <button class="button button--nav-prev">
+                <button id="btnIzquierda" class="button button--nav-prev">
                     <i class="icon icon--arrow-left"></i>
                     <span class="text-hidden">Anterior</span>
                 </button>
-                <button class="button button--zoom">
+                <button id="btnDetalles" class="button button--zoom">
                     <i class="icon icon--zoom"></i>
                     <div style="font-size:12px;">Detalles</div>
                 </button>
-                <button class="button button--nav-next">
+                <button id="btnDerecha" class="button button--nav-next">
                     <i class="icon icon--arrow-right"></i>
                     <span class="text-hidden">Siguiente</span>
                 </button>
@@ -245,6 +250,34 @@
                                style="font-size:100px;color:red;padding:50px"></i>
                         </a>
                         <div style="font-size:small" ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
+                        <script type="text/ng-template" id="dialog">
+                            <div class="animated flipInY">
+                                <h3>Template heading</h3>
+                                <p style="font-size:0.8em">Content goes here</p>
+                            </div>
+                        </script>
+                        <button ng-click="openDialog()">Dialog</button>
+                        <button ng-click="cerrarPagina()">Cerrar</button>
+
+
+
+                        <div class="md-modal md-effect-5" id="modal-1">
+                            <div class="md-content">
+                                <h3>Modal Dialog</h3>
+                                <div>
+                                    <p>This is a modal window. You can do the following things with it:</p>
+                                    <ul>
+                                        <li><strong>Read:</strong> Modal windows will probably tell you something important so don't forget to read what it says.</li>
+                                        <li><strong>Look:</strong> modal windows enjoy a certain kind of attention; just look at it and appreciate its presence.</li>
+                                        <li><strong>Close:</strong> click on the button below to close the modal.</li>
+                                    </ul>
+                                    <button ng-click="closeCodropsModal()" class="md-close">Close me!</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-overlay"></div>
+                        <button ng-click="codropsModal()" class="md-trigger" data-modal="modal-1">Newspaper</button>
+
                     </div>
                 </div>
             </div>
@@ -310,7 +343,7 @@
                 </div>
             </div>
 
-            <button class="button button--close">
+            <button id="btnCerrar" class="button button--close">
                 <i class="icon icon--circle-cross"></i><span class="text-hidden">Cerrar contenido</span>
             </button>
 
@@ -322,6 +355,7 @@
     <script src="js/classie.js"></script>
 	<script src="js/dynamics.min.js"></script>
 	<script src="js/main.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
     <script src="js/angular-app.js"></script></body>
 </html>

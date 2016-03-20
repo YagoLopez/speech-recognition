@@ -1,4 +1,4 @@
-var SpeechApp = angular.module('app-reconocimiento-voz', []);
+var SpeechApp = angular.module('app-reconocimiento-voz', ['ngDialog']);
 
 SpeechApp.config(function ($compileProvider) {
     $compileProvider.debugInfoEnabled(true);
@@ -52,7 +52,7 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
     return service;
 });
 // =====================================================================================================================
-SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope) {
+SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope, ngDialog) {
 
     // INICIALIZACIONES ------------------------------------------------------------------------------------------------
     if(!annyang || !'speechSynthesis' in window || !'SpeechRecognition' in window){
@@ -63,6 +63,35 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
     $scope.annyang = annyang;
     $scope.statusMessage = 'Reconocimiento de voz desactivado';
     $scope.toggle = ReconocimientoVoz.toggle;
+
+    $scope.openDialog = function () {
+        ngDialog.open({ template: 'dialog', className: 'ngdialog-theme-plain', disableAnimation:false });
+    };
+
+    $scope.cerrarPagina = function () {
+      document.getElementById('btnCerrar').click();
+    };
+
+    $scope.codropsModal = function () {
+        var el = document.querySelector('.md-trigger');
+        var modal = document.querySelector( '#' + el.getAttribute('data-modal') );
+        addEventListener( 'click', function( ev ) {
+            classie.add(modal, 'md-show');
+        });
+    };
+
+    $scope.closeCodropsModal = function (hasPerspective) {
+        console.log('cerrando modal');
+        var el = document.querySelector('.md-trigger');
+        var modal = document.querySelector( '#' + el.getAttribute('data-modal') );
+        addEventListener('click', function (ev) {
+            classie.remove( modal, 'md-show' );
+        });
+
+        if( hasPerspective ) {
+            classie.remove( document.documentElement, 'md-perspective' );
+        }
+    };
 
     // COMANDOS --------------------------------------------------------------------------------------------------------
     //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
@@ -115,7 +144,6 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
         $scope.$apply();
     });
     // FIN EVENTOS -----------------------------------------------------------------------------------------------------
-
 });
 // =====================================================================================================================
 SpeechApp.service('speech', function () {
