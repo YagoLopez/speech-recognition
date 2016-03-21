@@ -21,6 +21,7 @@
 	<link rel="stylesheet" type="text/css" href="css/component.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog-theme-plain.css" />
+    <link rel="stylesheet" type="text/css" href="bower_components/ng-notifications-bar/dist/ngNotificationsBar.min.css"/>
     <script src="js/modernizr.custom.js"></script>
     <script src="bower_components/annyang/annyang.js"></script>
     <link rel="shortcut icon" href="images/favicon.png">
@@ -89,6 +90,8 @@
 </head>
 
 <body ng-app="app-reconocimiento-voz">
+
+<notifications-bar class="notifications"></notifications-bar>
 
 	<!-- Main container -->
 	<div class="container">
@@ -251,22 +254,20 @@
                         </a>
                         <div style="font-size:small" ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
                         <script type="text/ng-template" id="dialog">
-                            <div class="animated flipInY">
+                            <div class="animated flipInX">
                                 <h3>Template heading</h3>
-                                <p style="font-size:0.8em">Content goes here</p>
+                                <p style="font-size:0.8em">Content goes here---</p>
                             </div>
                         </script>
                         <button ng-click="openDialog()">Dialog</button>
                         <button ng-click="cerrarPagina()">Cerrar</button>
-
-
-
+<!--
                         <div class="md-modal md-effect-5" id="modal-1">
                             <div class="md-content">
                                 <h3>Modal Dialog</h3>
                                 <div>
                                     <p>This is a modal window. You can do the following things with it:</p>
-                                    <ul>
+                                    <ul style="text-align: left;">
                                         <li><strong>Read:</strong> Modal windows will probably tell you something important so don't forget to read what it says.</li>
                                         <li><strong>Look:</strong> modal windows enjoy a certain kind of attention; just look at it and appreciate its presence.</li>
                                         <li><strong>Close:</strong> click on the button below to close the modal.</li>
@@ -277,7 +278,7 @@
                         </div>
                         <div class="md-overlay"></div>
                         <button ng-click="codropsModal()" class="md-trigger" data-modal="modal-1">Newspaper</button>
-
+-->
                     </div>
                 </div>
             </div>
@@ -357,5 +358,8 @@
 	<script src="js/main.js"></script>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
-    <script src="js/angular-app.js"></script></body>
+        <script src="js/angular-app.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/ng-notifications-bar/dist/ngNotificationsBar.js"></script>
+</body>
 </html>
