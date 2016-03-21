@@ -53,7 +53,7 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
     return service;
 });
 // =====================================================================================================================
-SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz, $scope, ngDialog, notifications, speech) {
+SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, ReconocimientoVoz, $scope, ngDialog, notifications, speech) {
 
     // INICIALIZACIONES ------------------------------------------------------------------------------------------------
     if(!annyang || !'speechSynthesis' in window || !'SpeechRecognition' in window){
@@ -63,12 +63,10 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
     ReconocimientoVoz.setLanguage('es-ES');
     $scope.annyang = annyang;
     $scope.statusMessage = 'Reconocimiento de voz desactivado';
-    $scope.toggle = ReconocimientoVoz.toggle;
-
+    $rootScope.toggle = ReconocimientoVoz.toggle;
     $scope.openDialog = function () {
         ngDialog.open({ template: 'dialog', className: 'ngdialog-theme-plain', disableAnimation:false });
     };
-
     $scope.cerrarPagina = function () {
       document.getElementById('btnCerrar').click();
     };
@@ -94,16 +92,17 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
     ReconocimientoVoz.addCommand('detalles', function () {
         document.getElementById('btnDetalles').click();
     });
+    ReconocimientoVoz.addCommand('ayuda', function () {
+        $scope.openDialog();
+     });
 
     // EVENTOS ---------------------------------------------------------------------------------------------------------
     annyang.addCallback('start', function () {
         $scope.statusMessage = 'Esperando comandos de voz...';
         $scope.$apply();
-        $scope.$apply(function () {
-            notifications.showError({
-                message: '<i class="ion-android-microphone animated fadeIn infinite"  ' +
-                'style="color:green;font-size:100px;color:lawngreen;padding:50px; !important"></i>&nbsp;&nbsp;'+$scope.statusMessage
-            });
+        notifications.showError({
+            message: '<i class="ion-android-microphone animated fadeIn infinite"></i> Esperando comandos de voz...'+
+            '<a href="#"> <i class="ion-close-circled"></i> Stop</a>'
         });
     });
     //annyang.addCallback('error', function () {
@@ -130,18 +129,23 @@ SpeechApp.controller('ControladorReconocimientoVoz', function (ReconocimientoVoz
         notifications.closeAll();
     });
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-        console.debug('Texto reconocido: ', userSaid);
-        console.debug('Nombre de funcion ejecutada: ', commandText);
-        console.debug('Resultados posibles por orden de probabilidad: ', phrases); // array
+        //var config = {
+        //    voiceIndex: 0,
+        //    rate: 1,
+        //    pitch: 1,
+        //    volume: 1
+        //};
+        speech.sayText(userSaid);
         $scope.statusMessage = userSaid;
-        speech.sayText('hola');
         $scope.$apply();
+        //console.debug('Texto reconocido: ', userSaid);
+        //console.debug('Nombre de funcion ejecutada: ', commandText);
+        //console.debug('Resultados posibles por orden de probabilidad: ', phrases); // array
     });
     annyang.addCallback('resultNoMatch', function (res) {
         console.log('Texto reconocido pero no asociado a ningun comando:', res);
-        //todo: modificar
-        speech.sayText(res[0]);
-        $scope.statusMessage = res[0];
+        //speech.sayText('Comando no reconocido');
+        $scope.statusMessage = '<div style="color:orangered">'+res[0]+'<br/>[Comando no reconocido]</div>';
         $scope.$apply();
     });
     // FIN EVENTOS -----------------------------------------------------------------------------------------------------

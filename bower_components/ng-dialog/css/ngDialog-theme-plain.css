@@ -1,12 +1,12 @@
 .ngdialog.ngdialog-theme-plain {
   padding-bottom: 160px;
-  padding-top: 160px;
+  padding-top: 100px;
 }
 
 .ngdialog.ngdialog-theme-plain .ngdialog-content {
   background:ghostwhite;
-  color: #444;
-  font-family: 'Helvetica Neue',sans-serif;
+  color: gray;
+  /*font-family: 'Helvetica Neue',sans-serif;*/
   font-size: 1.1em;
   line-height: 1.5em;
   margin: 0 auto;

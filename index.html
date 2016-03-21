@@ -4,6 +4,9 @@
 <!--todo: minificar-->
 <!--todo: acciones de voz-->
 <!--todo: averiguar el tiempo: dictar lugar y obtener respuesta hablada. esto podria ir en usa seccion llamada reconocimiento y sintesis-->
+<!--todo: comando ayuda muestra diálogo con comandos de voz (no se si se podrían leer)-->
+<!--todo: comando voz buscar en google-->
+<!--todo: comando voz hacer scroll-->
 <!DOCTYPE html>
 <html lang="es" class="no-js">
 <head>
@@ -25,73 +28,14 @@
     <script src="js/modernizr.custom.js"></script>
     <script src="bower_components/annyang/annyang.js"></script>
     <link rel="shortcut icon" href="images/favicon.png">
-    <title>Reconocimiento  y Síntesis de Voz - Demostración</title>
-<!--
-    <script>
-        if (annyang) {
-            var commands = {
-                'hola': function() { alert('Hello world!'); },
-                'siguiente': function () {
-                    console.log('dos.html');
-                    window.location.href = 'dos.html';
-                },
-                'fin': function () {
-                    console.log('finalizando sesion de voz mediante comando de voz');
-                    annyang.abort();
-                }
-            };
-
-            // Add our commands to annyang
-            annyang.addCommands(commands);
-            annyang.setLanguage('es-ES');
-            annyang.debug(false);
-
-            annyang.addCallback('start', function () {
-                console.log('inicio')
-            });
-            annyang.addCallback('error', function () {
-                console.warn('error reconocimiento de voz')
-            });
-            annyang.addCallback('errorNetwork', function () {
-                console.warn('error network')
-            });
-            annyang.addCallback('errorPermissionBlocked', function () {
-                console.warn('error permission blocked')
-            });
-            annyang.addCallback('errorPermissionDenied', function () {
-                console.warn('error permission denied')
-            });
-            annyang.addCallback('end', function () {
-                console.log('fin sesión reconocimiento de voz')
-            });
-            annyang.addCallback('result', function (res) {
-                console.info('Reconocimiento de voz positivo. Resultado: ')
-            });
-            annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-                console.log('Texto reconocido: ', userSaid); // sample output: 'hello'
-                console.log('Nombre de funcion ejecutada: ', commandText); // sample output: 'hello (there)'
-                console.log('Resultados posibles por orden de probabilidad: ', phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
-            });
-            annyang.addCallback('resultNoMatch', function (res) {
-                console.warn('No se han reconocido comandos para:', res)
-            });
-
-            // Start listening.
-            annyang.start({autoRestart: false, continuous: false});
-
-//            var toggleRecognition = function () {
-//                if( annyang.isListening() ){
-//                    annyang.abort()
-//                } else { annyang.start() }
-//            }
-        }
-    </script>
--->
+    <title>Reconocimiento y Síntesis de Voz - Demostración</title>
 </head>
 
 <body ng-app="app-reconocimiento-voz">
 
-<notifications-bar class="notifications"></notifications-bar>
+<notifications-bar class="notifications" ng-click="toggle()"></notifications-bar>
+
+<ng-include src="'html/dialog.html'"></ng-include>
 
 	<!-- Main container -->
 	<div class="container">
@@ -103,7 +47,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/88.jpg"/>
+                            <img src="../images/88.jpg"/>
                             <div class="zoomer__area zoomer__area--size-3"></div>
                         </div>
                     </div>
@@ -119,7 +63,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/66.jpg" alt="iPad Mini app preview" />
+                            <img src="../images/66.jpg" alt="iPad Mini app preview" />
                             <div class="zoomer__area zoomer__area--size-4"></div>
                         </div>
                     </div>
@@ -132,7 +76,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/22.jpg" alt="MacBook app preview" />
+                            <img src="../images/22.jpg" alt="MacBook app preview" />
                             <div class="zoomer__area zoomer__area--size-3"></div>
                         </div>
                     </div>
@@ -145,7 +89,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview">
-                            <img src="images/12.jpg" alt="iMac app preview" />
+                            <img src="../images/12.jpg" alt="iMac app preview" />
                             <div class="zoomer__area zoomer__area--size-5"></div>
                         </div>
                     </div>
@@ -158,7 +102,7 @@
                 <div class="slide__mover">
                     <div class="zoomer flex-center">
                         <div class="preview rounded">
-                            <img src="images/apple-watch-content-preview.png" alt="Apple Watch app preview" />
+                            <img src="../images/apple-watch-content-preview.png" alt="Apple Watch app preview" />
                             <div class="zoomer__area zoomer__area--size-1"></div>
                         </div>
                     </div>
@@ -189,140 +133,11 @@
         <!-- Contenido ============================================================================================= -->
         <section class="content">
 
-            <!-- Instrucciones ===================================================================================== -->
-            <div class="content__item" id="content-1">
-                <div class="content__item-inner">
-                    <img class="content__item-img animated" src="images/4.jpg" alt="iMac Content" />
-                    <h3>Reconocimiento de voz</h3>
-                    <p style="color:lightblue">Demostración  para navegadores compatibles y Android</p>
-                    <p>Aunque la tecnología "HTML5 Web Speech API" es un estandar W3C, debido a su reciente aparición,
-                        sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología, esta demostración
-                        permite interactuar con el software de distintas maneras: ejecutando comandos por voz,
-                        introduciendo texto mediante el habla, y convirtiendo texto a voz mediante habla sintética</p>
-                    <p>Los navegadores de Microsoft (IE, Edge) no son compatibles con esta aplicación</p>
-                    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
-                        Consultar compatibilidad entre navegadores &rarr;
-                    </a></p>
-                    <p>La demostración está dividida en tres secciones:</p>
-                    <ol style="font-size:14px">
-                        <li class="pad-botm5">Ejecución de comandos por voz</li>
-                        <li class="pad-botm5">Síntesis de voz</li>
-                        <li class="pad-botm5">Introducción de texto hablado</li>
-                    </ol>
-                    <p>Se puede acceder a cada sección navegando con las flechas por las distintas pantallas hasta llegar
-                        a la sección elegida</p>
-                    <h3>Instrucciones</h3>
-                    <ul style="font-size:14px;">
-                        <li class="pad-botm5">Siempre que se solicite, conceder permiso a la aplicación para que
-                            acceda al hardware del micrófono</li>
-                        <li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
-                        <li class="pad-botm5">Situarse en un entorno silencioso</li>
-                        <li class="pad-botm5">Utilizar un tono claro y normal</li>
-                        <li class="pad-botm5">Navegador compatible requerido</li>
-                        <li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
-                            Android por las cuestiones de compatibilidad antes mencionadas
-                        </li>
-                        <li class="pad-botm5">El reconocimiento de voz se realiza mediante un servicio web remoto
-                            por lo que se necesita una conexión de red. Dependiendo del ancho de banda disponible
-                            a veces los resultados pueden tardar algunos segundos en ser obtenidos</li>
-                    </ul>
-                 </div>
-            </div>
-            <!-- Fin instrucciones ================================================================================= -->
+            <ng-include src="'html/instrucciones.html'"></ng-include>
 
-            <!-- Reconocimiento voz =============================================================================== -->
-            <div class="content__item" id="content-2" style="width:100%" ng-controller="ControladorReconocimientoVoz">
-                <div class="content__item-inner" style="width:100%">
-                    <div style="text-align:center;font-size:0.8em">
-                        <h3 class="pad-botm5">Ejecución de comandos por voz</h3>
-                        <div style="margin:auto">
-                        <p><b style="color:lightskyblue">
-                            <i class="ion-ios-mic comand"></i>
-                            Pulsar el micrófono</b> Activa/desactiva el reconocimiento de voz</p>
-                        <p><b style="color:lightskyblue">
-                            <i class="ion-chatbubble-working comand"></i>
-                            "Siguiente"</b> Navega a la página siguiente</p>
-                        <p><b style="color:lightskyblue">
-                            <i class="ion-chatbubble-working comand"></i>
-                            "Detener Voz"</b> Detiene el reconocimiento de voz</p>
-                        </div>
-                        <a href="#" ng-click="toggle()" style="display:block">
-                            <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
-                               style="font-size:100px;color:lawngreen;padding:50px;"></i>
-                            <i ng-if="!annyang.isListening()" class="ion-android-microphone-off"
-                               style="font-size:100px;color:red;padding:50px"></i>
-                        </a>
-                        <div style="font-size:small" ng-bind-html="statusMessage | FiltroHtml | uppercase"></div>
-                        <script type="text/ng-template" id="dialog">
-                            <div class="animated flipInX">
-                                <h3>Template heading</h3>
-                                <p style="font-size:0.8em">Content goes here---</p>
-                            </div>
-                        </script>
-                        <button ng-click="openDialog()">Dialog</button>
-                        <button ng-click="cerrarPagina()">Cerrar</button>
-<!--
-                        <div class="md-modal md-effect-5" id="modal-1">
-                            <div class="md-content">
-                                <h3>Modal Dialog</h3>
-                                <div>
-                                    <p>This is a modal window. You can do the following things with it:</p>
-                                    <ul style="text-align: left;">
-                                        <li><strong>Read:</strong> Modal windows will probably tell you something important so don't forget to read what it says.</li>
-                                        <li><strong>Look:</strong> modal windows enjoy a certain kind of attention; just look at it and appreciate its presence.</li>
-                                        <li><strong>Close:</strong> click on the button below to close the modal.</li>
-                                    </ul>
-                                    <button ng-click="closeCodropsModal()" class="md-close">Close me!</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="md-overlay"></div>
-                        <button ng-click="codropsModal()" class="md-trigger" data-modal="modal-1">Newspaper</button>
--->
-                    </div>
-                </div>
-            </div>
-            <!-- Fin reconocimiento voz ============================================================================ -->
+            <ng-include src="'html/reconocimiento-voz.html'" ng-controller="ReconocimientoVozCtrl"></ng-include>
 
-            <!-- Síntesis voz ====================================================================================== -->
-            <div class="content__item" id="content-3" style="width:100%" ng-controller="speechCtrl">
-                <div class="content__item-inner" style="min-width:100%">
-                    <h3>Síntesis de voz</h3>
-                    <form>
-                        <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
-                            <option value="">Escoger idioma</option>
-                        </select>
-                        <div class="controls">
-                            <label>Tono: {{ pitch }}</label>
-                            <input type="range" ng-model="pitch" min="0" max="2" step="1" />
-                            <label>Velocidad: {{ rate }}</label>
-                            <input type="range" ng-model="rate" min="0.1" max="10" step="0.1" />
-                            <!--<label>Volume: {{ volume }}</label>-->
-                            <!--<input type="range" ng-model="volume" min="0" max="1" step="1" />-->
-                        </div>
-                        <p style="font-size:0.9em;text-align:center">
-                            Nota: Sólo compatible con teléfonos Android. En estos teléfonos,
-                            los lenguajes disonibles dependen de si se hallan instalados
-                            o no en el sistema operatvo. El control del tono y la velocidad no está soportado en todas
-                            las voces</p>
-                        <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
-                        <table align="center"style="width:100%">
-                            <tr>
-                                <td>
-                                    <button ng-click="submitEntry()" class="btn">
-                                        <i class="ion-ios-play"></i> Hablar
-                                    </button>
-                                </td>
-                                <td>
-                                    <button ng-click="speech.cancel()" class="btn"><i class="ion-ios-pause"></i> Detener</button>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="hidden">is talking: {{ speech.isTalking() }}</div>
-                    </form>
-                </div>
-            </div>
-            <!-- Fin síntesis voz ================================================================================== -->
+            <ng-include src="'html/sintesis-voz.html'" ng-controller="speechCtrl"></ng-include>
 
             <div class="content__item" id="content-4">
                 <img class="content__item-img rounded-right" src="images/imac-content.jpg" alt="iMac Content" />
@@ -356,10 +171,10 @@
     <script src="js/classie.js"></script>
 	<script src="js/dynamics.min.js"></script>
 	<script src="js/main.js"></script>
-    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="js/angular-app.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
-        <script src="js/angular-app.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="bower_components/ng-notifications-bar/dist/ngNotificationsBar.js"></script>
 </body>
 </html>
