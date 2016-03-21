@@ -15,6 +15,7 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
     service.userSaid = null;
     service.commandText = null;
     service.phrases = null;
+    service.statusMessage = null;
 
     service.addCommand = function(phrase, callback) {
         var command = {};
@@ -62,7 +63,7 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     }
     ReconocimientoVoz.setLanguage('es-ES');
     $scope.annyang = annyang;
-    $scope.statusMessage = 'Reconocimiento de voz desactivado';
+    $rootScope.statusMessage = 'Reconocimiento de voz desactivado';
     $rootScope.toggle = ReconocimientoVoz.toggle;
     $scope.openDialog = function () {
         ngDialog.open({ template: 'dialog', className: 'ngdialog-theme-plain', disableAnimation:false });
@@ -98,10 +99,10 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
 
     // EVENTOS ---------------------------------------------------------------------------------------------------------
     annyang.addCallback('start', function () {
-        $scope.statusMessage = 'Esperando comandos de voz...';
+        $rootScope.statusMessage = 'Esperando comandos de voz...';
         $scope.$apply();
         notifications.showError({
-            message: '<i class="ion-android-microphone animated fadeIn infinite"></i> Esperando comandos de voz...'+
+            message: '<i class="ion-android-microphone animated fadeIn infinite"></i> '+$rootScope.statusMessage+
             '<a href="#"> <i class="ion-close-circled"></i> Stop</a>'
         });
     });
@@ -109,19 +110,19 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     //    console.warn('error reconocimiento de voz')
     //});
     annyang.addCallback('errorNetwork', function () {
-        $scope.statusMessage = 'Fallo de red / Sin conexion de datos';
+        $rootScope.statusMessage = 'Fallo de red / Sin conexion de datos';
         $scope.$apply();
     });
     annyang.addCallback('errorPermissionBlocked', function () {
-        $scope.statusMessage = 'Permiso para acceder al microfono bloqueado';
+        $rootScope.statusMessage = 'Permiso para acceder al microfono bloqueado';
         $scope.$apply();
     });
     annyang.addCallback('errorPermissionDenied', function () {
-        $scope.statusMessage = 'Permiso para usar microfono denegado';
+        $rootScope.statusMessage = 'Permiso para usar microfono denegado';
         $scope.$apply();
     });
     annyang.addCallback('end', function () {
-        $scope.statusMessage = 'Reconocimiento de voz desactivado';
+        $rootScope.statusMessage = 'Reconocimiento de voz desactivado';
         //notifications.showInfo({
         //    message: 'fin'
         //});
@@ -129,14 +130,9 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
         notifications.closeAll();
     });
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-        //var config = {
-        //    voiceIndex: 0,
-        //    rate: 1,
-        //    pitch: 1,
-        //    volume: 1
-        //};
+        //var config = {voiceIndex: 0, rate: 1, pitch: 1, volume: 1};
         speech.sayText(userSaid);
-        $scope.statusMessage = userSaid;
+        $rootScope.statusMessage = userSaid;
         $scope.$apply();
         //console.debug('Texto reconocido: ', userSaid);
         //console.debug('Nombre de funcion ejecutada: ', commandText);
@@ -145,7 +141,7 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     annyang.addCallback('resultNoMatch', function (res) {
         console.log('Texto reconocido pero no asociado a ningun comando:', res);
         //speech.sayText('Comando no reconocido');
-        $scope.statusMessage = '<div style="color:orangered">'+res[0]+'<br/>[Comando no reconocido]</div>';
+        $rootScope.statusMessage = '<div style="color:red">'+res[0]+'<br/>[Comando no reconocido]</div>';
         $scope.$apply();
     });
     // FIN EVENTOS -----------------------------------------------------------------------------------------------------
