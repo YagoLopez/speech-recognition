@@ -100,17 +100,17 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     // EVENTOS ---------------------------------------------------------------------------------------------------------
     annyang.addCallback('start', function () {
         $rootScope.statusMessage = 'Esperando comandos de voz...';
-        $scope.$apply();
         notifications.showError({
             message: '<i class="ion-android-microphone animated fadeIn infinite"></i> '+$rootScope.statusMessage+
             '<a href="#"> <i class="ion-close-circled"></i> Stop</a>'
         });
+        $scope.$apply();
     });
     //annyang.addCallback('error', function () {
     //    console.warn('error reconocimiento de voz')
     //});
     annyang.addCallback('errorNetwork', function () {
-        $rootScope.statusMessage = 'Fallo de red / Sin conexion de datos';
+        $rootScope.statusMessage = 'Fallo de red/Sin conexion de datos';
         $scope.$apply();
     });
     annyang.addCallback('errorPermissionBlocked', function () {
@@ -123,15 +123,12 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     });
     annyang.addCallback('end', function () {
         $rootScope.statusMessage = 'Reconocimiento de voz desactivado';
-        //notifications.showInfo({
-        //    message: 'fin'
-        //});
         $scope.$apply();
         notifications.closeAll();
     });
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-        //var config = {voiceIndex: 0, rate: 1, pitch: 1, volume: 1};
-        speech.sayText(userSaid);
+        var config = {voiceIndex: 0, rate: 1, pitch: 1, volume: 1};
+        speech.sayText(userSaid, config);
         $rootScope.statusMessage = userSaid;
         $scope.$apply();
         //console.debug('Texto reconocido: ', userSaid);
@@ -139,7 +136,6 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
         //console.debug('Resultados posibles por orden de probabilidad: ', phrases); // array
     });
     annyang.addCallback('resultNoMatch', function (res) {
-        console.log('Texto reconocido pero no asociado a ningun comando:', res);
         //speech.sayText('Comando no reconocido');
         $rootScope.statusMessage = '<div style="color:red">'+res[0]+'<br/>[Comando no reconocido]</div>';
         $scope.$apply();
