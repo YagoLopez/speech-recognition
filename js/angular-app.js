@@ -101,8 +101,8 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     annyang.addCallback('start', function () {
         $rootScope.statusMessage = 'Esperando comandos de voz...';
         notifications.showError({
-            message: '<i class="ion-android-microphone animated fadeIn infinite"></i> '+$rootScope.statusMessage+
-            '<a href="#"> <i class="ion-close-circled"></i> Stop</a>'
+            message: '<i class="ion-android-microphone animated fadeIn infinite"></i> '+
+            '<a href="#"> <span style="color:yellow">Detener</span></a>'
         });
         $scope.$apply();
     });
