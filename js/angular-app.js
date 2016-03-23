@@ -7,41 +7,37 @@ SpeechApp.config(function ($compileProvider, notificationsConfigProvider) {
     notificationsConfigProvider.setAcceptHTML(true);
 });
 // =====================================================================================================================
-SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
+SpeechApp.service('ReconocimientoVoz', function ($rootScope) {
 
-    var service = {};
+    this.commands = {};
+    this.userSaid = null;
+    this.commandText = null;
+    this.phrases = null;
 
-    service.commands = {};
-    service.userSaid = null;
-    service.commandText = null;
-    service.phrases = null;
-    service.statusMessage = null;
-
-    service.addCommand = function(phrase, callback) {
+    this.addCommand = function(phrase, callback) {
         var command = {};
-
         command[phrase] = function(args) {
             $rootScope.$apply(callback(args));
         };
 
-        // Extend our commands list
-        angular.extend(service.commands, command);
+        // Extiende lista comandos por voz
+        angular.extend(this.commands, command);
 
-        // Add the commands to annyang
-        annyang.addCommands(service.commands);
-        //console.debug('added command "' + phrase + '"', service.commands);
+        // Anade comandos al motor reconocedor de voz
+        annyang.addCommands(this.commands);
+        //console.debug('added command "' + phrase + '"', this.commands);
     };
-    service.start = function() {
-        annyang.addCommands(service.commands);
+    this.start = function() {
+        annyang.addCommands(this.commands);
         annyang.debug(false);
         annyang.start();
-        console.debug('annyang', annyang);
-        console.debug('SpeechRecognizer', annyang.getSpeechRecognizer());
+        //console.debug('annyang', annyang);
+        //console.debug('SpeechRecognizer', annyang.getSpeechRecognizer());
     };
-    service.setLanguage = function (codigoLenguage) {
+    this.setLanguage = function (codigoLenguage) {
         annyang.setLanguage(codigoLenguage); // 'es-ES' -> spanish
     };
-    service.toggle = function () {
+    this.toggle = function () {
         if(annyang.isListening()) {
             annyang.abort();
             console.log('Reconocimiento de voz desactivado');
@@ -51,10 +47,9 @@ SpeechApp.factory('ReconocimientoVoz', function ($rootScope) {
             console.log('Reconocimiento de voz activado');
         }
     };
-    return service;
 });
 // =====================================================================================================================
-SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, ReconocimientoVoz, $scope, ngDialog, notifications, speech) {
+SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, ReconocimientoVoz, $scope, ngDialog, notifications, SintesisVoz) {
 
     // INICIALIZACIONES ------------------------------------------------------------------------------------------------
     if(!annyang || !'speechSynthesis' in window || !'SpeechRecognition' in window){
@@ -69,20 +64,16 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
         ngDialog.open({ template: 'dialog', className: 'ngdialog-theme-plain', disableAnimation:false });
     };
     $scope.cerrarPagina = function () {
-      document.getElementById('btnCerrar').click();
+        document.getElementById('btnCerrar').click();
     };
-
     // COMANDOS --------------------------------------------------------------------------------------------------------
-    //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
-    //    console.debug(allSpeech);
-    //    vm.addResult(allSpeech);
-    //});
     ReconocimientoVoz.addCommand('detener voz', function () {
         console.log('desactivar voz');
         annyang.abort();
     });
     ReconocimientoVoz.addCommand('cerrar', function () {
-        document.getElementById('btnCerrar').click();
+        $scope.cerrarPagina();
+        console.log('is open dialog', ngDialog.isOpen('dialog'))
     });
     ReconocimientoVoz.addCommand('siguiente', function () {
         document.getElementById('btnDerecha').click();
@@ -95,20 +86,26 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     });
     ReconocimientoVoz.addCommand('ayuda', function () {
         $scope.openDialog();
-     });
+    });
+    ReconocimientoVoz.addCommand('cerrar ayuda', function () {
+        ngDialog.close();
+    });
+    //ReconocimientoVoz.addCommand('buscar', function (termino) {
+    //    window.location.href = 'http://www.google.es?q=' + termino
+    //});
+    //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
+    //    console.debug(allSpeech);
+    //    vm.addResult(allSpeech);
+    //});
 
     // EVENTOS ---------------------------------------------------------------------------------------------------------
     annyang.addCallback('start', function () {
         $rootScope.statusMessage = 'Esperando comandos de voz...';
         notifications.showError({
-            message: '<i class="ion-android-microphone animated fadeIn infinite"></i> '+
-            '<a href="#"> <span style="color:yellow">Detener</span></a>'
+            message: '<i class="ion-android-microphone animated fadeIn infinite"></i><a href="#"> Detener Voz </a>'
         });
         $scope.$apply();
     });
-    //annyang.addCallback('error', function () {
-    //    console.warn('error reconocimiento de voz')
-    //});
     annyang.addCallback('errorNetwork', function () {
         $rootScope.statusMessage = 'Fallo de red/Sin conexion de datos';
         $scope.$apply();
@@ -128,49 +125,25 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, Reconocimien
     });
     annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
         var config = {voiceIndex: 0, rate: 1, pitch: 1, volume: 1};
-        speech.sayText(userSaid, config);
+        SintesisVoz.hablarTexto(userSaid, config);
         $rootScope.statusMessage = userSaid;
         $scope.$apply();
-        //console.debug('Texto reconocido: ', userSaid);
-        //console.debug('Nombre de funcion ejecutada: ', commandText);
-        //console.debug('Resultados posibles por orden de probabilidad: ', phrases); // array
     });
     annyang.addCallback('resultNoMatch', function (res) {
-        //speech.sayText('Comando no reconocido');
-        $rootScope.statusMessage = '<div style="color:red">'+res[0]+'<br/>[Comando no reconocido]</div>';
+        //SintesisVoz.hablarTexto('Comando no reconocido');
+        $rootScope.statusMessage = res[0]+'<div style="color:red">Comando no reconocido</div>';
         $scope.$apply();
     });
+
     // FIN EVENTOS -----------------------------------------------------------------------------------------------------
-
-    //$scope.codropsModal = function () {
-    //    var el = document.querySelector('.md-trigger');
-    //    var modal = document.querySelector( '#' + el.getAttribute('data-modal') );
-    //    addEventListener( 'click', function( ev ) {
-    //        classie.add(modal, 'md-show');
-    //    });
-    //};
-
-    //$scope.closeCodropsModal = function (hasPerspective) {
-    //    console.log('cerrando modal');
-    //    var el = document.querySelector('.md-trigger');
-    //    var modal = document.querySelector( '#' + el.getAttribute('data-modal') );
-    //    addEventListener('click', function (ev) {
-    //        classie.remove( modal, 'md-show' );
-    //    });
-    //
-    //    if( hasPerspective ) {
-    //        classie.remove( document.documentElement, 'md-perspective' );
-    //    }
-    //};
-
 });
 // =====================================================================================================================
-SpeechApp.service('speech', function () {
+SpeechApp.service('SintesisVoz', function () {
 
-     //Deteccion de sintetizador de voz
-    var msg = null;
+    // Deteccion de sintetizador de voz
+    var configuracionVoz = null;
     if(window.speechSynthesis) {
-        msg = new SpeechSynthesisUtterance();
+        configuracionVoz = new SpeechSynthesisUtterance();
     } else {
         alert('El navegador no soporta síntesis de voz');
         return;
@@ -179,19 +152,15 @@ SpeechApp.service('speech', function () {
     this.getVoices = function() {
         return window.speechSynthesis.getVoices();
     };
-    this.sayText = function(text, config) {
+    this.hablarTexto = function(text, config) {
         var voices = this.getVoices();
-
         //choose voice. Fallback to default
-        msg.voice = config && config.voiceIndex ? voices[config.voiceIndex] : voices[0];
-        msg.volume = config && config.volume ? config.volume : 1;
-        msg.rate = config && config.rate ? config.rate : 1;
-        msg.pitch = config && config.pitch ? config.pitch : 1;
-
-        //message for speech
-        msg.text = text;
-
-        speechSynthesis.speak(msg);
+        configuracionVoz.voice = config && config.voiceIndex ? voices[config.voiceIndex] : voices[0];
+        configuracionVoz.volume = config && config.volume ? config.volume : 1;
+        configuracionVoz.rate = config && config.rate ? config.rate : 1;
+        configuracionVoz.pitch = config && config.pitch ? config.pitch : 1;
+        configuracionVoz.text = text;
+        speechSynthesis.speak(configuracionVoz);
     };
     this.cancel = function() {
         speechSynthesis.cancel();
@@ -205,22 +174,22 @@ SpeechApp.service('speech', function () {
     this.resume = function () {
         speechSynthesis.resume();
     };
-    msg.onend = function () {};
-    msg.onerror = function () {
+    configuracionVoz.onerror = function () {
         console.error('Error en la síntesis de voz')
     }
 });
 // =====================================================================================================================
-SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($scope, $timeout, speech) {
+SpeechApp.controller('SintesisVozCtrl', function ($scope, $timeout, SintesisVoz) {
 
-    $scope.support = false;
-    if(window.speechSynthesis) {
-        $scope.support = true;
+    //$scope.support = false;
+    //if(window.speechSynthesis) {
+        //$scope.support = true;
 
+        // Deja tiempo para cargar los idiomas
         $timeout(function () {
-            $scope.voices = speech.getVoices();
-        }, 200);
-    }
+            $scope.voices = SintesisVoz.getVoices();
+        }, 500);
+    //}
 
     $scope.pitch = 1;
     $scope.rate = 1;
@@ -230,24 +199,29 @@ SpeechApp.controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($s
         'Por el contrario, si la frase es falsa, entonces su enunciado es verdadero, ' +
         'lo que también implica contradicción';
 
-    $scope.submitEntry = function () {
-        var voiceIdx = $scope.voices.indexOf($scope.optionSelected);
+
+    $scope.onClickBtnHablar = function () {
+        if($scope.optionSelected){
+            var voiceIdx = $scope.voices.indexOf($scope.optionSelected);
+        } else
+            voiceIdx = 0;
         var config = {
-                voiceIndex: voiceIdx,
-                rate: $scope.rate,
-                pitch: $scope.pitch,
-                volume: $scope.volume
-            };
-        console.log(window.speechSynthesis);
-        speech.sayText($scope.msg, config);
+            voiceIndex: voiceIdx,
+            rate: $scope.rate,
+            pitch: $scope.pitch,
+            volume: $scope.volume
+        };
+        SintesisVoz.hablarTexto($scope.msg, config);
+        console.log('option selected', $scope.optionSelected);
     };
 
-    $scope.speech = speech;
+    $scope.SintesisVoz = SintesisVoz;
 
-}]);
+});
 // =====================================================================================================================
-SpeechApp.filter('FiltroHtml', ['$sce', function($sce) {
+SpeechApp.filter('filtroHtml', ['$sce', function($sce) {
     return function(value, type) {
         return $sce.trustAs(type || 'html', value);
     }
 }]);
+// =====================================================================================================================

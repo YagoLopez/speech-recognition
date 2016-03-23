@@ -1,7 +1,7 @@
 <div class="content__item" id="content-3" style="width:100%">
     <div class="content__item-inner" style="min-width:100%">
         <h3>Síntesis de voz</h3>
-        <form>
+        <form ng-controller="SintesisVozCtrl">
             <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
                 <option value="">Escoger idioma</option>
             </select>
@@ -14,24 +14,22 @@
                 <!--<input type="range" ng-model="volume" min="0" max="1" step="1" />-->
             </div>
             <p style="font-size:0.9em;text-align:center">
-                Nota: Sólo compatible con teléfonos Android. En estos teléfonos,
-                los lenguajes disonibles dependen de si se hallan instalados
-                o no en el sistema operatvo. El control del tono y la velocidad no está soportado en todas
-                las voces</p>
+                Nota: Sólo compatible con teléfonos Android. Los lenguajes disonibles dependen de si se hallan instalados
+                o no en el sistema operatvo. El control del tono y la velocidad depende de cada voz.
+                Algunas voces no soportan más allá de velocidad 2</p>
             <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
             <table align="center"style="width:100%">
                 <tr>
                     <td>
-                        <button ng-click="submitEntry()" class="btn">
+                        <button ng-click="onClickBtnHablar()" class="btn">
                             <i class="ion-ios-play"></i> Hablar
                         </button>
                     </td>
                     <td>
-                        <button ng-click="speech.cancel()" class="btn"><i class="ion-ios-pause"></i> Detener</button>
+                        <button ng-click="SintesisVoz.cancel()" class="btn"><i class="ion-ios-pause"></i> Detener</button>
                     </td>
                 </tr>
             </table>
-            <div class="hidden">is talking: {{ speech.isTalking() }}</div>
         </form>
     </div>
 </div>

@@ -3,7 +3,6 @@
 <!--todo: disable debug info-->
 <!--todo: minificar-->
 <!--todo: acciones de voz-->
-<!--todo: averiguar el tiempo: dictar lugar y obtener respuesta hablada. esto podria ir en usa seccion llamada reconocimiento y sintesis-->
 <!--todo: comando ayuda muestra diálogo con comandos de voz (no se si se podrían leer)-->
 <!--todo: comando voz buscar en google-->
 <!--todo: comando voz hacer scroll-->
@@ -130,16 +129,16 @@
         </section>
         <!-- Fin Slider ============================================================================================ -->
 
-        <div style="font-size:medium;text-align:center" ng-bind-html="statusMessage | FiltroHtml"></div>
+        <div style="font-size:medium;text-align:center" ng-bind-html="statusMessage"></div>
 
         <!-- Contenido ============================================================================================= -->
         <section class="content">
 
             <ng-include src="'html/instrucciones.html'"></ng-include>
 
-            <ng-include src="'html/reconocimiento-voz.html'" ng-controller="ReconocimientoVozCtrl"></ng-include>
+            <ng-include src="'html/reconocimiento-voz.html'"></ng-include>
 
-            <ng-include src="'html/sintesis-voz.html'" ng-controller="speechCtrl"></ng-include>
+            <ng-include src="'html/sintesis-voz.html'"></ng-include>
 
             <div class="content__item" id="content-4">
                 <img class="content__item-img rounded-right" src="images/imac-content.jpg" alt="iMac Content" />
@@ -170,13 +169,14 @@
 
 	</div>
 
-    <script src="js/classie.js"></script>
-	<script src="js/dynamics.min.js"></script>
-	<script src="js/main.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="js/angular-app.js"></script>
-    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
-    <script src="bower_components/ng-notifications-bar/dist/ngNotificationsBar.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/dynamics.min.js"></script>
+<script src="js/main.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="js/angular-app.js"></script>
+<script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+<script src="bower_components/ng-notifications-bar/dist/ngNotificationsBar.js"></script>
+
 </body>
 </html>

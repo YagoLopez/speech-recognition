@@ -1,41 +1,23 @@
-<div class="content__item" id="content-2" style="width:100%">
+<div class="content__item" id="content-2" style="width:100%" ng-controller="ReconocimientoVozCtrl">
     <div class="content__item-inner" style="width:100%">
         <div style="text-align:center;font-size:1em">
             <h3>Ejecución de comandos por voz</h3>
-            <div style="margin:auto;text-align:left;">
+            <div>
                 <div><b style="color:lightskyblue">
                     <i class="ion-ios-mic comand"></i>
                     Pulsar el micrófono:</b> Activa/desactiva el reconocimiento de voz</div>
                 <div style="color:gold">Se puede navegar por las distintas pantallas de la aplicación
-                    mediante los siguientes comandos:</div>
-                <div><b style="color:lightskyblue">
-                    <i class="ion-chatbubble-working comand"></i>
-                    "Cerrar"</b> Cierra la pantalla actual</div>
-                <div><b style="color:lightskyblue">
-                    <i class="ion-chatbubble-working comand"></i>
-                    "Siguiente"</b> Navega a la página siguiente</div>
-                <div><b style="color:lightskyblue">
-                    <i class="ion-chatbubble-working comand"></i>
-                    "Detalles"</b> Accede a la página de detalles</div>
-                <div><b style="color:lightskyblue">
-                    <i class="ion-chatbubble-working comand"></i>
-                    "Anterior"</b> Navega a la página anterior</div>
-                <div><b style="color:lightskyblue">
-                    <i class="ion-chatbubble-working comand"></i>
-                    "Ayuda"</b> Muestra información sobre los comandos de voz</div>
-                <div><b style="color:lightskyblue">
-                    <i class="ion-chatbubble-working comand"></i>
-                    "Detener Voz"</b> Detiene el reconocimiento de voz</div>
+                    usando comandos de voz</div>
+                <p><a href="#" ng-click="openDialog()">Ver comandos &rightarrow;</a></p>
             </div>
             <a href="#" ng-click="toggle()" style="display:block">
                 <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
-                   style="font-size:100px;color:lawngreen;padding:50px;"></i>
+                   style="font-size:100px;color:lawngreen"></i>
                 <i ng-if="!annyang.isListening()" class="ion-android-microphone-off"
-                   style="font-size:100px;color:red;padding:50px"></i>
+                   style="font-size:100px;color:red"></i>
             </a>
-            <p style="font-size:large" ng-bind-html="statusMessage | FiltroHtml"></p>
-            <button ng-click="openDialog()">Dialog</button>
-            <button ng-click="cerrarPagina()">Cerrar</button>
+            <p style="font-size:large" ng-bind-html="statusMessage | filtroHtml"></p>
+            <button ng-click="cerrarPagina()" class="btn"><i class="ion-close-circled"></i> Cerrar</button>
         </div>
     </div>
 </div>

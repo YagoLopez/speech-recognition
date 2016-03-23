@@ -135,7 +135,7 @@
 
 
         angular.module('digitalbs.speechSynthesis', ['digitalbs.speech'])
-                .controller('speechCtrl', ['$scope', '$timeout', 'speech', function ($scope, $timeout, speech) {
+                .controller('SintesisVozCtrl', ['$scope', '$timeout', 'speech', function ($scope, $timeout, speech) {
                     $scope.support = false;
                     if(window.speechSynthesis) {
                         $scope.support = true;
@@ -166,7 +166,7 @@
     </script>
 </head>
 <body>
-<div id="speechTest" ng-app="digitalbs.speechSynthesis" ng-controller="speechCtrl">
+<div id="speechTest" ng-app="digitalbs.speechSynthesis" ng-controller="SintesisVozCtrl">
     <h2>Speech Synthesis with Angular</h2>
     <p class="browser-support">Current Browser Support: Chrome Canary, Safari 7, Nightly Firefox</p>
 
