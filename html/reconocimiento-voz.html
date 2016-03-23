@@ -8,12 +8,12 @@
                     Pulsar el micrófono:</b> Activa/desactiva el reconocimiento de voz</div>
                 <div style="color:gold">Se puede navegar por las distintas pantallas de la aplicación
                     usando comandos de voz</div>
-                <p><a href="#" ng-click="openDialog()">Ver comandos &rightarrow;</a></p>
+                <p><a href="#" ng-click="ayuda()">Ver comandos &rightarrow;</a></p>
             </div>
-            <a href="#" ng-click="toggle()" style="display:block">
-                <i ng-if="annyang.isListening()" class="ion-android-microphone animated fadeIn infinite"
+            <a href="#" ng-click="ReconocimientoVoz.toggle()" style="display:block">
+                <i ng-if="ReconocimientoVoz.isListening()" class="ion-android-microphone animated fadeIn infinite"
                    style="font-size:100px;color:lawngreen"></i>
-                <i ng-if="!annyang.isListening()" class="ion-android-microphone-off"
+                <i ng-if="!ReconocimientoVoz.isListening()" class="ion-android-microphone-off"
                    style="font-size:100px;color:red"></i>
             </a>
             <p style="font-size:large" ng-bind-html="statusMessage | filtroHtml"></p>
