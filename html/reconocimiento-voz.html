@@ -11,13 +11,15 @@
                 <p><a href="#" ng-click="ayuda()">Ver comandos &rightarrow;</a></p>
             </div>
             <a href="#" ng-click="ReconocimientoVoz.toggle()" style="display:block">
-                <i ng-if="ReconocimientoVoz.isListening()" class="ion-android-microphone animated fadeIn infinite"
+                <i ng-if="ReconocimientoVoz.isListening()" class="icon ion-android-microphone animated fadeIn infinite"
                    style="font-size:100px;color:lawngreen"></i>
-                <i ng-if="!ReconocimientoVoz.isListening()" class="ion-android-microphone-off"
+                <i ng-if="!ReconocimientoVoz.isListening()" class="icon ion-android-microphone-off"
                    style="font-size:100px;color:red"></i>
             </a>
             <p style="font-size:large" ng-bind-html="statusMessage | filtroHtml"></p>
-            <button ng-click="cerrarPagina()" class="btn"><i class="ion-close-circled"></i> Cerrar</button>
+            <div style="margin-left:30%;margin-right:30%">
+                <button ng-click="cerrarPagina()" class="btn"><i class="ion-android-close"></i> Cerrar</button>
+            </div>
         </div>
     </div>
 </div>

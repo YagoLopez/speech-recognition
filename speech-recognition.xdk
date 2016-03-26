@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "4c66b253-4954-446a-94f0-c3a18b699445",
-      "lastModifiedDate": 1457917590248,
+      "lastModifiedDate": 1458848802663,
       "creationDate": 1457904788469
     },
     "sourceDirectory": "",
@@ -78,6 +78,26 @@
         "description": "Cordova Media Plugin",
         "data": {},
         "dependedBy": []
+      },
+      {
+        "id": "cordova-plugin-tts",
+        "name": "TTS",
+        "version": "0.2.3",
+        "originType": "cordova.io",
+        "origin": "cordova-plugin-tts",
+        "gitref": "",
+        "paramvals": {},
+        "sourceLocation": "plugins/cordova-plugin-tts",
+        "selectedState": "Included",
+        "checksum": "18b0ae3a",
+        "dependsOn": [],
+        "topLevel": true,
+        "author": "VILIC VANE",
+        "permissions": {},
+        "description": "Cordova Text-to-Speech Plugin",
+        "data": {},
+        "dependedBy": [],
+        "custom": "true"
       }
     ],
     "serviceMethods": [],

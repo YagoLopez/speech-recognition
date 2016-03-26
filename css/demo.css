@@ -347,7 +347,7 @@ textarea{
 
 .btn {
     border:none;
-    border-radius:5px;
+    /*border-radius:5px;*/
     background: cornflowerblue;
     color:#fff;
     padding:1em 0.8em;

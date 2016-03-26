@@ -25,7 +25,7 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
     this.start = function() {
         annyang.addCommands(this.commands);
         annyang.debug(false);
-        annyang.start();
+        annyang.start({ autoRestart:true, continuous: true });
     };
     this.abort = function () {
         annyang.abort();
@@ -38,10 +38,10 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
     };
     this.toggle = function () {
         if(annyang.isListening()) {
-            annyang.abort();
+            this.abort();
             console.log('Reconocimiento de voz desactivado');
         } else {
-            annyang.start();
+            this.start();
             console.log('Reconocimiento de voz activado');
         }
     };
@@ -74,9 +74,8 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
         $rootScope.$apply();
         notifications.closeAll();
     });
-    annyang.addCallback('resultMatch', function (usuarioDijo, textoComando, frases) {
-        var config = {voiceIndex: 0, rate: 1, pitch: 1, volume: 1};
-        SintesisVoz.hablarTexto(usuarioDijo, config);
+    annyang.addCallback('resultMatch', function (usuarioDijo, textoComando, frasesPosibles) {
+        SintesisVoz.hablarTexto(usuarioDijo);
         $rootScope.statusMessage = usuarioDijo;
         $rootScope.$apply();
     });
@@ -105,7 +104,6 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, $scope, Reco
     $scope.cerrarPagina = function () {
         document.getElementById('btnCerrar').click();
     };
-
     // COMANDOS --------------------------------------------------------------------------------------------------------
 
     ReconocimientoVoz.addCommand('detener voz', function () {
@@ -193,9 +191,10 @@ SpeechApp.service('SintesisVoz', function () {
         return;
     }
     this.getVoices = function() {
-        return window.speechSynthesis.getVoices();
+        return speechSynthesis.getVoices();
     };
     this.hablarTexto = function(texto, config) {
+
         var voices = this.getVoices();
 
         // Configura voz. Si no hay valores escogidos, usar valores por defecto
@@ -204,7 +203,23 @@ SpeechApp.service('SintesisVoz', function () {
         configuracionVoz.rate = config && config.rate ? config.rate : 1;
         configuracionVoz.pitch = config && config.pitch ? config.pitch : 1;
         configuracionVoz.text = texto;
-        speechSynthesis.speak(configuracionVoz);
+
+        if (window.cordova) {
+            // sintesis de voz cuando estamos en un dispositivo android
+            TTS.speak({
+                    text: texto,
+                    locale: 'es-ES',
+                    rate: configuracionVoz.rate
+                }, function () {
+                    alert("sintesis de voz con exito")
+                },
+                function (reason) {
+                    alert('supuestamente esto es un error de tts en cordova: ', reason)
+                });
+        } else {
+            // sintesis de voz cuando estamos en navegador
+            speechSynthesis.speak(configuracionVoz);
+        }
     };
     this.cancel = function() {
         speechSynthesis.cancel();
@@ -223,13 +238,12 @@ SpeechApp.service('SintesisVoz', function () {
     //}
 });
 // =====================================================================================================================
-SpeechApp.controller('SintesisVozCtrl', function ($scope, $timeout, SintesisVoz) {
+SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout) {
 
-    // Deja tiempo para cargar los idiomas
+    // Deja tiempo para cargar las voces
     $timeout(function () {
         $scope.voices = SintesisVoz.getVoices();
-    }, 500);
-
+    }, 1000);
     $scope.pitch = 1;
     $scope.rate = 1;
     $scope.volume = 1;
@@ -254,6 +268,22 @@ SpeechApp.controller('SintesisVozCtrl', function ($scope, $timeout, SintesisVoz)
     };
 
     $scope.SintesisVoz = SintesisVoz;
+
+    $scope.test = function () {
+        if (window.cordova) {
+            TTS.speak({text: 'esto es una prueba de sintesis de voz',
+                    locale: 'es-ES',
+                    rate: 1
+                }, function () {
+                    alert("success")
+                },
+                function (reason) {
+                    alert('supuestamente esto es un error: ', reason)
+                });
+            alert('tts si: ', tts)
+        } else
+            alert('tts no')
+    }
 
 });
 // =====================================================================================================================

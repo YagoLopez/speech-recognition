@@ -7,7 +7,8 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-media": {}
+        "cordova-plugin-media": {},
+        "cordova-plugin-tts": {}
     },
     "dependent_plugins": {
         "cordova-plugin-file": {}
