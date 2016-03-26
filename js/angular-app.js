@@ -206,15 +206,15 @@ SpeechApp.service('SintesisVoz', function () {
 
         if (window.cordova) {
             // sintesis de voz cuando estamos en un dispositivo android
-            TTS.speak({
+            window.TTS.speak({
                     text: texto,
                     locale: 'es-ES',
                     rate: configuracionVoz.rate
                 }, function () {
-                    alert("sintesis de voz con exito")
+                    alert('sintesis de voz con exito')
                 },
                 function (reason) {
-                    alert('supuestamente esto es un error de tts en cordova: ', reason)
+                    alert('supuestamente esto es un error de tts en cordova: '+reason)
                 });
         } else {
             // sintesis de voz cuando estamos en navegador
@@ -270,17 +270,18 @@ SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout)
     $scope.SintesisVoz = SintesisVoz;
 
     $scope.test = function () {
+        window.TTS.speak({
+                text: 'esto es una prueba de sintesis de voz',
+                locale: 'es-ES',
+                rate: 1
+            }, function () {
+                alert("success")
+            },
+            function (reason) {
+                alert('supuestamente esto es un error: '+reason)
+            });
         if (window.cordova) {
-            TTS.speak({text: 'esto es una prueba de sintesis de voz',
-                    locale: 'es-ES',
-                    rate: 1
-                }, function () {
-                    alert("success")
-                },
-                function (reason) {
-                    alert('supuestamente esto es un error: ', reason)
-                });
-            alert('tts si: ', tts)
+            alert('tts si: '+tts)
         } else
             alert('tts no')
     }

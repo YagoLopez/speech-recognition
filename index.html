@@ -12,7 +12,7 @@
 	<meta name="description" content="A simple content slider with depth-like zoom functionality" />
 	<meta name="keywords" content="reconocimiento de voz, speech recognition, voice recognition, voice control, demo" />
 	<meta name="author" content="Yago López Salvador" />
-	<link rel="stylesheet" type="text/css" href="fonts/feather/style.css">
+	<link rel="stylesheet" type="text/css" href="fonts/feather/style.css /">
     <link rel="stylesheet" type="text/css" href="fonts/google-lato-font.css" />
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.css"/>
@@ -21,22 +21,13 @@
     <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog-theme-plain.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/ng-notifications-bar/dist/ngNotificationsBar.min.css"/>
+    <script type="text/javascript" src="cordova.js"></script>
     <script src="js/modernizr.custom.js"></script>
     <script src="bower_components/annyang/annyang.js"></script>
     <link rel="shortcut icon" href="images/favicon.png">
     <title>Reconocimiento y Síntesis de Voz - Demostración</title>
-<!--
-    <script>
-        document.addEventListener('deviceready', function onDeviceReady() {
-            angular.bootstrap(document, ['app-reconocimiento-voz']);
-        }, false);
-
-        var SpeechApp = angular.module('app-reconocimiento-voz', ['ngDialog', 'ngNotificationsBar', 'ngSanitize']);
-    </script>
--->
 </head>
-
-<body ng-app="app-reconocimiento-voz">
+<body>
 
 <notifications-bar class="notifications" ng-click="ReconocimientoVoz.toggle()"></notifications-bar>
 
@@ -181,5 +172,31 @@
 <script src="js/angular-app.js"></script>
 <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
 <script src="bower_components/ng-notifications-bar/dist/ngNotificationsBar.js"></script>
+<script>
+    angular.element(document).ready(function () {
+        if (window.cordova) {
+            console.log("Running in Cordova, will bootstrap AngularJS once 'deviceready' event fires.");
+            document.addEventListener('deviceready', function () {
+                console.log('Deviceready event has fired, bootstrapping AngularJS.');
+                alert('Cordova  ready')
+                angular.bootstrap(document.body, ['app-reconocimiento-voz']);
+                window.TTS.speak({
+                            text: 'probando sintesis de voz desde cordova',
+                            locale: 'es-ES',
+                            rate: 1
+                        }, function () {
+                            alert("sintesis de voz con exito")
+                        },
+                        function (reason) {
+                            alert('supuestamente esto es un error de tts en cordova: ', reason)
+                        });
+            }, false);
+        } else {
+            console.log("Running in browser, bootstrapping AngularJS now.");
+            angular.bootstrap(document.body, ['app-reconocimiento-voz']);
+            alert('no cordova');
+        }
+    });
+</script>
 </body>
 </html>
