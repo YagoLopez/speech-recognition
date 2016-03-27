@@ -2,7 +2,7 @@ var SpeechApp = angular.module('app-reconocimiento-voz', ['ngDialog', 'ngNotific
 
 SpeechApp.config(function ($compileProvider, notificationsConfigProvider) {
 
-    $compileProvider.debugInfoEnabled(true);
+    $compileProvider.debugInfoEnabled(false);
     notificationsConfigProvider.setAutoHide(false);
     notificationsConfigProvider.setAcceptHTML(true);
 });
@@ -205,16 +205,17 @@ SpeechApp.service('SintesisVoz', function () {
         configuracionVoz.text = texto;
 
         if (window.cordova) {
-            // sintesis de voz cuando estamos en un dispositivo android
-            window.TTS.speak({
+            // sintesis de voz cuando estamos en  dispositivo android
+            TTS.speak({
                     text: texto,
                     locale: 'es-ES',
-                    rate: configuracionVoz.rate
+                    rate: configuracionVoz.rate,
+                    pitch: configuracionVoz.pitch
                 }, function () {
-                    alert('sintesis de voz con exito')
+                    console.log('Síntesis de voz correcta')
                 },
                 function (reason) {
-                    alert('supuestamente esto es un error de tts en cordova: '+reason)
+                    alert('Error: sintetizador de voz no disponible')
                 });
         } else {
             // sintesis de voz cuando estamos en navegador
@@ -222,7 +223,11 @@ SpeechApp.service('SintesisVoz', function () {
         }
     };
     this.cancel = function() {
-        speechSynthesis.cancel();
+        if (window.cordova){
+            TTS.speak({text:''}); // android
+        } else {
+            speechSynthesis.cancel(); // navegador
+        }
     };
     this.isTalking = function() {
         return speechSynthesis.speaking;
@@ -270,7 +275,7 @@ SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout)
     $scope.SintesisVoz = SintesisVoz;
 
     $scope.test = function () {
-        window.TTS.speak({
+        TTS.speak({
                 text: 'esto es una prueba de sintesis de voz',
                 locale: 'es-ES',
                 rate: 1

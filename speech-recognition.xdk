@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "4c66b253-4954-446a-94f0-c3a18b699445",
-      "lastModifiedDate": 1458848802663,
+      "lastModifiedDate": 1459027808403,
       "creationDate": 1457904788469
     },
     "sourceDirectory": "",
@@ -154,7 +154,15 @@
           "navigation": []
         },
         "icons_": [],
-        "splashes_": [],
+        "splashes_": [
+          {
+            "relPath": "images/drawable-hdpi/11.9.png",
+            "density": "hdpi",
+            "height": 640,
+            "width": 480,
+            "orientation": "portrait"
+          }
+        ],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "appVersion_": "0.0.1",
