@@ -11,9 +11,9 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
 
     this.commands = {};
 
-    this.addCommand = function(phrase, callback) {
+    this.addCommand = function(frase, callback) {
         var command = {};
-        command[phrase] = function(args) {
+        command[frase] = function(args) {
             $rootScope.$apply(callback(args));
         };
         // Extiende lista comandos por voz
@@ -94,10 +94,7 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, $scope, Reco
         return;
     }
     ReconocimientoVoz.setLanguage('es-ES');
-    //$scope.annyang = annyang;
     $rootScope.statusMessage = 'Reconocimiento de voz desactivado';
-    //$scope.isListening = ReconocimientoVoz.isListening;
-    //$rootScope.toggle = ReconocimientoVoz.toggle;
     $scope.ayuda = function () {
         ngDialog.open({ template: 'ayuda', className: 'ngdialog-theme-plain', disableAnimation:false });
     };
@@ -111,7 +108,11 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, $scope, Reco
         ReconocimientoVoz.abort();
     });
     ReconocimientoVoz.addCommand('cerrar', function () {
-        $scope.cerrarPagina();
+        if(ngDialog.getOpenDialogs().length > 0){
+            ngDialog.closeAll();
+        } else {
+            $scope.cerrarPagina();
+        }
     });
     ReconocimientoVoz.addCommand('siguiente', function () {
         document.getElementById('btnDerecha').click();
@@ -125,55 +126,11 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, $scope, Reco
     ReconocimientoVoz.addCommand('ayuda', function () {
         $scope.ayuda();
     });
-    //ReconocimientoVoz.addCommand('cerrar ayuda', function () {
-    //    ngDialog.close();
-    //});
-    //ReconocimientoVoz.addCommand('buscar', function (termino) {
-    //    window.location.href = 'http://www.google.es?q=' + termino
-    //});
+
     //ReconocimientoVoz.addCommand('*allSpeech', function(allSpeech) {
     //    console.debug(allSpeech);
     //    vm.addResult(allSpeech);
     //});
-
-    // EVENTOS ---------------------------------------------------------------------------------------------------------
-    //annyang.addCallback('start', function () {
-    //    $rootScope.statusMessage = 'Esperando comandos de voz...';
-    //    notifications.showError({
-    //        message: '<i class="ion-android-microphone animated fadeIn infinite"></i><a href="#"> Detener Voz </a>'
-    //    });
-    //    $scope.$apply();
-    //});
-/*    annyang.addCallback('errorNetwork', function () {
-        $rootScope.statusMessage = 'Fallo de red/Sin conexion de datos';
-        $scope.$apply();
-    });
-    annyang.addCallback('errorPermissionBlocked', function () {
-        $rootScope.statusMessage = 'Permiso para acceder al microfono bloqueado';
-        $scope.$apply();
-    });
-    annyang.addCallback('errorPermissionDenied', function () {
-        $rootScope.statusMessage = 'Permiso para usar microfono denegado';
-        $scope.$apply();
-    });
-    annyang.addCallback('end', function () {
-        $rootScope.statusMessage = 'Reconocimiento de voz desactivado';
-        $scope.$apply();
-        notifications.closeAll();
-    });
-    annyang.addCallback('resultMatch', function (userSaid, commandText, phrases) {
-        var config = {voiceIndex: 0, rate: 1, pitch: 1, volume: 1};
-        SintesisVoz.hablarTexto(userSaid, config);
-        $rootScope.statusMessage = userSaid;
-        $scope.$apply();
-    });
-    annyang.addCallback('resultNoMatch', function (res) {
-        //SintesisVoz.hablarTexto('Comando no reconocido');
-        $rootScope.statusMessage = res[0]+'<div style="color:red">Comando no reconocido</div>';
-        $scope.$apply();
-    });*/
-
-    // FIN EVENTOS -----------------------------------------------------------------------------------------------------
 
     // Necesario en rootScope para poder controlar el reconocimento de voz en toda la app
     $rootScope.ReconocimientoVoz = ReconocimientoVoz;
@@ -205,7 +162,7 @@ SpeechApp.service('SintesisVoz', function () {
         configuracionVoz.text = texto;
 
         if (window.cordova) {
-            // sintesis de voz cuando estamos en  dispositivo android
+            // sintesis de voz cuando estamos en dispositivo android
             TTS.speak({
                     text: texto,
                     locale: 'es-ES',
@@ -248,15 +205,12 @@ SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout)
     // Deja tiempo para cargar las voces
     $timeout(function () {
         $scope.voices = SintesisVoz.getVoices();
-    }, 1000);
+    }, 500);
     $scope.pitch = 1;
     $scope.rate = 1;
     $scope.volume = 1;
-    $scope.msg = 'La paradoja de Epiménides dice lo siguiente: "Esta frase es falsa".\n\n' +
-        'Si la frase es verdadera se contradice a sí misma.\n\n' +
-        'Por el contrario, si la frase es falsa, entonces su enunciado es verdadero, ' +
-        'lo que también implica contradicción';
-
+    $scope.msg = 'Prueba de síntesis de voz';
+    $scope.isAndroid = window.cordova != null;
 
     $scope.onClickBtnHablar = function () {
         if($scope.optionSelected){
@@ -273,23 +227,6 @@ SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout)
     };
 
     $scope.SintesisVoz = SintesisVoz;
-
-    $scope.test = function () {
-        TTS.speak({
-                text: 'esto es una prueba de sintesis de voz',
-                locale: 'es-ES',
-                rate: 1
-            }, function () {
-                alert("success")
-            },
-            function (reason) {
-                alert('supuestamente esto es un error: '+reason)
-            });
-        if (window.cordova) {
-            alert('tts si: '+tts)
-        } else
-            alert('tts no')
-    }
 
 });
 // =====================================================================================================================

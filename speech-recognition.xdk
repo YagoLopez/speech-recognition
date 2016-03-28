@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "",
       "projectGuid": "4c66b253-4954-446a-94f0-c3a18b699445",
-      "lastModifiedDate": 1459027808403,
+      "lastModifiedDate": 1459110128956,
       "creationDate": 1457904788469
     },
     "sourceDirectory": "",
@@ -153,14 +153,21 @@
           ],
           "navigation": []
         },
-        "icons_": [],
+        "icons_": [
+          {
+            "relPath": "images/favicon.png",
+            "density": "ldpi",
+            "height": 36,
+            "width": 36
+          }
+        ],
         "splashes_": [
           {
-            "relPath": "images/drawable-hdpi/11.9.png",
-            "density": "hdpi",
-            "height": 640,
-            "width": 480,
-            "orientation": "portrait"
+            "relPath": "images/11.big.9.png",
+            "density": "xhdpi",
+            "height": 720,
+            "width": 960,
+            "orientation": "landscape"
           }
         ],
         "addlPermissions_": "",

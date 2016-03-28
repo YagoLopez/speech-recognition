@@ -2,16 +2,16 @@
     <div class="content__item-inner" style="min-width:100%">
         <h3>Síntesis de voz</h3>
         <form ng-controller="SintesisVozCtrl">
-            <select ng-model="optionSelected" ng-options="voice.name for voice in voices">
-                <option value="">Escoger idioma</option>
-            </select>
+            <div ng-if="!isAndroid">
+                <select ng-model="optionSelected" ng-options="voice.name for voice in voices" title="Voces">
+                    <option value="">Escoger idioma</option>
+                </select>
+            </div>
             <div class="controls">
                 <label>Tono: {{ pitch }}</label>
-                <input type="range" ng-model="pitch" min="0" max="2" step="1" />
+                <input type="range" ng-model="pitch" min="0" max="2" step="1"  title="Tono"/>
                 <label>Velocidad: {{ rate }}</label>
-                <input type="range" ng-model="rate" min="0.1" max="10" step="0.1" />
-                <!--<label>Volume: {{ volume }}</label>-->
-                <!--<input type="range" ng-model="volume" min="0" max="1" step="1" />-->
+                <input type="range" ng-model="rate" min="0.1" max="10" step="0.1"  title="Velocidad"/>
             </div>
             <p style="font-size:0.9em;text-align:center">
                 Nota: Funciones de voz sólo compatible con teléfonos Android. Los lenguajes disonibles dependen de
@@ -19,19 +19,19 @@
                 o no en el sistema operativo. El control del tono y la velocidad depende de cada voz.
                 Algunas voces no soportan más allá de velocidad 2</p>
             <textarea ng-model="msg" placeholder="Introducir texto..."></textarea>
-            <table align="center"style="width:100%">
+            <table align="center" style="width:100%">
                 <tr>
                     <td>
                         <button ng-click="onClickBtnHablar()" class="btn">
                             <i class="ion-ios-play"></i> Hablar
                         </button>
                     </td>
-                    <td>
+                    <td ng-if="!isAndroid">
                         <button ng-click="SintesisVoz.cancel()" class="btn"><i class="ion-ios-pause"></i> Detener</button>
                     </td>
                 </tr>
             </table>
-            <button ng-click="test()">test</button>
+            <p style="font-size:large;text-align: center;" ng-bind-html="statusMessage | filtroHtml"></p>
         </form>
     </div>
 </div>
