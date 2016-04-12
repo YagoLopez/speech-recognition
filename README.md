@@ -44,7 +44,8 @@
 </li>
 
 <br/>
-<div style='text-align:center'><a href='./iframe/iframe.html' target='_blank_'><b>VER ONLINE VERSION PARA WEB</b></a> &rarr;</div>
+<div style='text-align:center'><a href='http://yagolopez.github.io/speech-recognition/iframe/iframe.html' target='_blank_'>
+<b>VER ONLINE VERSION PARA WEB</b></a> &rarr;</div>
 
 <h1>Auditoría</h1>
 
