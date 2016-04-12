@@ -7,7 +7,7 @@
 <br/>
 <p>Aunque la tecnología "<i>HTML5 Web Speech API</i>" 
     es un <a href='https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html' target='_blank_'>estandar W3C</a>, 
-    debido a su reciente aparición,
+    debido a su reciente aparición
     sólo algunos navegadores como Chrome o FireFox en sus últimas versiones la incorporan. 
     Usando dicha tecnología, esta demostración
     permite interactuar con un programa de distintas maneras: <b>ejecutando comandos por voz</b>
