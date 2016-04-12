@@ -43,7 +43,6 @@
     Android por las cuestiones de compatibilidad antes mencionadas
 </li>
 
-<br/>
 <div style='text-align:center'><a href='http://yagolopez.github.io/speech-recognition/iframe/iframe.html' target='_blank_'>
 <b>VER ONLINE VERSION PARA WEB</b></a> &rarr;</div>
 
