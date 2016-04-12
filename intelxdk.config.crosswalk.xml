@@ -9,10 +9,16 @@
 <access origin="*"/>
 <allow-intent href="*"/>
 <icon platform="android" src="images/favicon.png" density="ldpi" width="36" height="36"/>
-<splash platform="android" src="images/11.big.9.png" density="xhdpi" width="960" height="720" orientation="landscape"/>
+<icon platform="android" src="images/res/ico/mipmap-xhdpi/ic_launcher.png" density="xhdpi" width="96" height="96"/>
+<icon platform="android" src="images/res/ico/mipmap-hdpi/ic_launcher.png" density="hdpi" width="72" height="72"/>
+<icon platform="android" src="images/res/ico/mipmap-mdpi/ic_launcher.png" density="mdpi" width="48" height="48"/>
+<splash platform="android" src="images/res/drawable-port-hdpi-v4/10.png" density="hdpi" width="480" height="640" orientation="portrait"/>
+<splash platform="android" src="images/res/drawable-port-ldpi-v4/10.9.png" density="ldpi" width="320" height="426" orientation="portrait"/>
+<splash platform="android" src="images/res/drawable-port-mdpi-v4/10.9.png" density="mdpi" width="320" height="470" orientation="portrait"/>
 <intelxdk:plugin intelxdk:name="File" intelxdk:value="cordova-plugin-file" intelxdk:version="2.1.0" intelxdk:checksum="fbf7c4d1" intelxdk:type="file"/>
 <intelxdk:plugin intelxdk:name="Media" intelxdk:value="cordova-plugin-media" intelxdk:version="1.0.1" intelxdk:checksum="93cdda44"/>
 <intelxdk:plugin intelxdk:name="TTS" intelxdk:value="cordova-plugin-tts" intelxdk:version="0.2.3" intelxdk:checksum="18b0ae3a"/>
+<intelxdk:plugin intelxdk:name="Splashscreen" intelxdk:value="cordova-plugin-splashscreen" intelxdk:version="2.1.0" intelxdk:checksum="170efb68"/>
 <intelxdk:plugin intelxdk:name="Cordova Network Whitelist Plugin" intelxdk:value="cordova-plugin-whitelist" intelxdk:version="1.1.0"/>
 <preference name="android-minSdkVersion" value="14"/>
 <preference name="android-targetSdkVersion" value="19"/>
@@ -20,4 +26,7 @@
 <intelxdk:crosswalk version="15"/>
 <preference name="splashscreen" value="splash"/>
 <!--creationInfo:{"src":"","projectTypeName":"com.intel.xdk.projecttype.jsapp"}-->
-<preference name="debuggable" value="false"/></widget>
+<preference name="debuggable" value="false"/>
+<preference name="SplashScreenDelay" value="10000"/>
+<intelxdk:crosswalk xmlns:intelxdk="http://xdk.intel.com/ns/v1" xwalk-command-line="--ignore-gpu-blacklist"/>
+<intelxdk:crosswalk xmlns:intelxdk="http://xdk.intel.com/ns/v1" xwalk-command-line="--single-process"/></widget>

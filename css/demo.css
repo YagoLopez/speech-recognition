@@ -1,4 +1,3 @@
-/*@import url(http://fonts.googleapis.com/css?family=Lato:400,700);*/
 @font-face {
 	font-family: 'bpicons';
 	font-weight: normal;
@@ -245,31 +244,11 @@ a:hover {
     padding-bottom: 15px;
 }
 
- /*body {*/
-     /*background: #dfdfdf;*/
-     /*padding:0 1em;*/
- /*}*/
-
 #speechTest {
     background: #efefef;
     padding:0.5em 1em;
     overflow:hidden;
 }
-
-/*h2 {*/
-    /*color:#333;*/
-    /*margin-bottom:0;*/
-/*}*/
-
-/*p {*/
-    /*font-size:0.98em;*/
-    /*margin-bottom:1.8em;*/
-/*}*/
-
-/*p span {*/
-    /*display:block;*/
-    /*font-size:0.7em;*/
-/*}*/
 
 #support {
     color:red;
@@ -293,7 +272,6 @@ a:hover {
 input, select, textarea {
     display:block;
     margin-bottom:1.2em;
-    /*width: 20em;*/
     width:100%;
     heigth:50px;
 }
@@ -316,12 +294,9 @@ select, input[type="text"] {
 
 label {
     font-size:1em;
-    /*color:#003399;*/
 }
 
 select {
-    /*width: 20em;*/
-    /*height:2.5em;*/
     width:100%;
     heigth:50px;
 }
@@ -347,7 +322,7 @@ textarea{
 
 .btn {
     border:none;
-    /*border-radius:5px;*/
+    border-radius:4px;
     background: cornflowerblue;
     color:#fff;
     padding:1em 0.8em;
@@ -372,7 +347,6 @@ textarea{
     left: 50%;
     width: 50%;
     max-width: 630px;
-    /*min-width: 320px;*/
     min-width:250px;
     height: auto;
     z-index: 2000;
@@ -386,17 +360,6 @@ textarea{
 }
 
 .md-overlay {
-    /*    position: fixed;
-        width: 100%;
-        height: 100%;
-        visibility: hidden;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        opacity: 0;
-        /!*background: rgba(143,27,15,0.8);*!/
-        transition: all 0.3s;*/
-
     position: fixed;
     width: 90%;
     height: 90%;
@@ -424,78 +387,65 @@ textarea{
     background: #222;
     perspective: 600px;
 }
-
+.ngdialog-content {
+    max-width: 80% !important;
+}
 .container {
-    /*background: #e74c3c;*/
-    /*background: cornflowerblue;*/
     min-height: 100%;
 }
 
-/* Effect 1: Fade in and scale up */
-/*.md-effect-1 .md-content {
-    background: cornflowerblue;
-    -webkit-transform: scale(0.7);
-    -moz-transform: scale(0.7);
-    -ms-transform: scale(0.7);
-    transform: scale(0.7);
-    opacity: 0;
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
+.reconocimiento-voz-container {
+    text-align: center;
+    font-size: 1em;
 }
 
-.md-show.md-effect-1 .md-content {
-    -webkit-transform: scale(1);
-    -moz-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-    opacity: 1;
-}*/
-
-/* Effect 5: newspaper */
-.md-show.md-effect-5 ~ .md-overlay {
-    /*background: rgba(0,127,108,0.8);*/
-    background: cornflowerblue;
+.icon-blue {
+    color: lightskyblue;
 }
 
-.md-effect-5 .md-content {
-    transform: scale(0) rotate(720deg);
-    opacity: 0;
-    transition: all 0.5s;
+.color-gold {
+    color: gold;
 }
 
-.md-show.md-effect-5 .md-content {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
+.mic-rec-on {
+    font-size: 100px;
+    color: lawngreen;
 }
 
-/* Effect 9: 3D flip vertical */
-/*
-.md-effect-9.md-modal {
-    background: cornflowerblue;
-    -webkit-perspective: 1300px;
-    -moz-perspective: 1300px;
-    perspective: 1300px;
+.mic-rec-off {
+    font-size: 100px;
+    color: red;
 }
 
-.md-effect-9 .md-content {
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-transform: rotateX(-70deg);
-    -moz-transform: rotateX(-70deg);
-    -ms-transform: rotateX(-70deg);
-    transform: rotateX(-70deg);
-    -webkit-transition: all 0.3s;
-    -moz-transition: all 0.3s;
-    transition: all 0.3s;
-    opacity: 0;
+.status-message {
+    font-size: large;
+    text-align: center;
 }
 
-.md-show.md-effect-9 .md-content {
-    -webkit-transform: rotateX(0deg);
-    -moz-transform: rotateX(0deg);
-    -ms-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    opacity: 1;
-}*/
+.p-cerrar-pagina {
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 100px;
+}
+
+.subtitulo {
+    color: lightblue;
+}
+
+.font-size-14 {
+    font-size: 14px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.pad-left-15 {
+    padding-left:15px;
+}
+
+.link-mic {
+    display: block;
+    width: 150px;
+    margin: auto;
+}

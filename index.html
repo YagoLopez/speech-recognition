@@ -1,4 +1,4 @@
-<!--todo: disable debug info-->
+﻿<!--todo: disable debug info-->
 <!--todo: minificar-->
 <!--todo: acciones de voz-->
 <!--todo: comando voz buscar en google-->
@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="A simple content slider with depth-like zoom functionality" />
 	<meta name="keywords" content="reconocimiento de voz, speech recognition, voice recognition, voice control, demo" />
-	<meta name="author" content="Yago López Salvador" />
+	<meta name="author" content="Yago López Salvador"/>
 	<link rel="stylesheet" type="text/css" href="fonts/feather/style.css"/>
     <link rel="stylesheet" type="text/css" href="fonts/google-lato-font.css"/>
     <link rel="stylesheet" type="text/css" href="css/demo.css"/>
@@ -21,18 +21,18 @@
     <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog.min.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/ng-dialog/css/ngDialog-theme-plain.min.css"/>
     <link rel="stylesheet" type="text/css" href="bower_components/ng-notifications-bar/dist/ngNotificationsBar.min.css"/>
-    <script type="text/javascript" src="cordova.js"></script>
 
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
     <script type="text/javascript" src="js/modernizr.custom.js"></script>
-    <script type="text/javascript" src="bower_components/annyang/annyang.js"></script>
+    <script type="text/javascript" src="bower_components/annyang/annyang.min.js"></script>
     <link rel="shortcut icon" href="images/favicon.png">
     <title>Reconocimiento y Síntesis de Voz - Demostración</title>
 </head>
-<body>
+<body ng-app="app-reconocimiento-voz">
 
-<notifications-bar class="notifications" ng-click="ReconocimientoVoz.toggle()"></notifications-bar>
+    <notifications-bar class="notifications" ng-click="toggle()"></notifications-bar>
 
-<ng-include src="'html/dialog.html'"></ng-include>
+    <ng-include src="'html/dialog.html'"></ng-include>
 
 	<!-- Main container -->
 	<div class="container">
@@ -103,6 +103,7 @@
 
         <!-- Contenido ============================================================================================= -->
         <section class="content">
+
             <ng-include src="'html/instrucciones.html'"></ng-include>
 
             <ng-include src="'html/reconocimiento-voz.html'"></ng-include>
@@ -125,6 +126,7 @@
 <script src="js/angular-app.js"></script>
 <script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
 <script src="bower_components/ng-notifications-bar/dist/ngNotificationsBar.min.js"></script>
-<script src="js/init.js"></script>
+<!--<script src="js/init.js"></script>-->
+<script type="text/javascript" src="cordova.js"></script>
 </body>
 </html>

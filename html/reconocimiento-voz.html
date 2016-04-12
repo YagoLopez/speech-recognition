@@ -1,24 +1,24 @@
-<div class="content__item" id="content-2" style="width:100%" ng-controller="ReconocimientoVozCtrl">
-    <div class="content__item-inner" style="width:100%">
-        <div style="text-align:center;font-size:1em">
+<div class="content__item full-width" id="content-2" ng-controller="ReconocimientoVozCtrl">
+    <div class="content__item-inner full-width">
+        <div class="reconocimiento-voz-container">
             <h3>Ejecución de comandos por voz</h3>
             <div>
-                <div><b style="color:lightskyblue">
+                <div><b class="icon-blue">
                     <i class="ion-ios-mic comand"></i>
                     Pulsar el micrófono:</b> Activa/desactiva el reconocimiento de voz</div>
-                <div style="color:gold">Se puede navegar por las distintas pantallas de la aplicación
+                <div class="color-gold">Se puede navegar por las distintas pantallas de la aplicación
                     usando comandos de voz</div>
                 <p><a href="#" ng-click="ayuda()">Ver comandos &rightarrow;</a></p>
             </div>
-            <a href="#" ng-click="ReconocimientoVoz.toggle()" style="display:block">
-                <i ng-if="ReconocimientoVoz.isListening()" class="icon ion-android-microphone animated fadeIn infinite"
-                   style="font-size:100px;color:lawngreen"></i>
-                <i ng-if="!ReconocimientoVoz.isListening()" class="icon ion-android-microphone-off"
-                   style="font-size:100px;color:red"></i>
+            <a href="#" ng-click="toggle()" class="link-mic">
+                <i ng-if="isListening()"
+                   class="icon ion-android-microphone animated fadeIn infinite mic-rec-on"></i>
+                <i ng-if="!isListening()"
+                   class="icon ion-android-microphone-off mic-rec-off"></i>
             </a>
-            <p style="font-size:large" ng-bind-html="statusMessage | filtroHtml"></p>
-            <p style="margin-left:30%;margin-right:30%">
-                <button ng-click="cerrarPagina()" class="btn"><i class="ion-android-close"></i> Cerrar</button>
+            <p class="status-message" ng-bind-html="statusMessage | filtroHtml"></p>
+            <p class="p-cerrar-pagina">
+                <button ng-click="cerrarPagina()" class="btn"><i class="ion-ios-close-outline"></i> Cerrar</button>
             </p>
         </div>
      </div>

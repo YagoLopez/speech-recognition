@@ -23,7 +23,7 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
         annyang.addCommands(this.commands);
     };
     this.start = function() {
-        annyang.addCommands(this.commands);
+        //annyang.addCommands(this.commands);
         annyang.debug(false);
         annyang.start({ autoRestart:true, continuous: true });
     };
@@ -39,10 +39,10 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
     this.toggle = function () {
         if(annyang.isListening()) {
             this.abort();
-            console.log('Reconocimiento de voz desactivado');
+            //console.log('Reconocimiento de voz desactivado');
         } else {
             this.start();
-            console.log('Reconocimiento de voz activado');
+            //console.log('Reconocimiento de voz activado');
         }
     };
 
@@ -51,6 +51,7 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
     annyang.addCallback('start', function () {
         $rootScope.statusMessage = 'Esperando comandos de voz...';
         notifications.showError({
+            // No es error, es notificacion informativa de color rojo en la parte superior
             message: '<i class="ion-android-microphone animated fadeIn infinite"></i><a href="#"> Detener Voz </a>'
         });
         $rootScope.$apply();
@@ -62,10 +63,12 @@ SpeechApp.service('ReconocimientoVoz', function ($rootScope, notifications, Sint
             className: 'ngdialog-theme-plain', disableAnimation:false, plain: true });
     });
     annyang.addCallback('errorPermissionBlocked', function () {
+        notifications.closeAll();
         $rootScope.statusMessage = 'Permiso para acceder al microfono bloqueado';
         $rootScope.$apply();
     });
     annyang.addCallback('errorPermissionDenied', function () {
+        notifications.closeAll();
         $rootScope.statusMessage = 'Permiso para usar microfono denegado';
         $rootScope.$apply();
     });
@@ -95,12 +98,20 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, $scope, Reco
     }
     ReconocimientoVoz.setLanguage('es-ES');
     $rootScope.statusMessage = 'Reconocimiento de voz desactivado';
+    $rootScope.cerrarPagina = function () {
+        document.getElementById('btnCerrar').click();
+    };
+    $rootScope.toggle = function () {
+        ReconocimientoVoz.toggle();
+    };
     $scope.ayuda = function () {
         ngDialog.open({ template: 'ayuda', className: 'ngdialog-theme-plain', disableAnimation:false });
     };
-    $scope.cerrarPagina = function () {
-        document.getElementById('btnCerrar').click();
+
+    $scope.isListening = function () {
+        return ReconocimientoVoz.isListening();
     };
+
     // COMANDOS --------------------------------------------------------------------------------------------------------
 
     ReconocimientoVoz.addCommand('detener voz', function () {
@@ -131,9 +142,6 @@ SpeechApp.controller('ReconocimientoVozCtrl', function ($rootScope, $scope, Reco
     //    console.debug(allSpeech);
     //    vm.addResult(allSpeech);
     //});
-
-    // Necesario en rootScope para poder controlar el reconocimento de voz en toda la app
-    $rootScope.ReconocimientoVoz = ReconocimientoVoz;
 
 });
 // =====================================================================================================================
@@ -202,10 +210,13 @@ SpeechApp.service('SintesisVoz', function () {
 // =====================================================================================================================
 SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout) {
 
-    // Deja tiempo para cargar las voces
-    $timeout(function () {
-        $scope.voices = SintesisVoz.getVoices();
-    }, 500);
+    if(!window.cordova){
+        // Deja tiempo para cargar las voces
+        $timeout(function () {
+            $scope.voices = SintesisVoz.getVoices();
+        }, 100);
+    }
+
     $scope.pitch = 1;
     $scope.rate = 1;
     $scope.volume = 1;
@@ -226,7 +237,9 @@ SpeechApp.controller('SintesisVozCtrl', function ($scope, SintesisVoz, $timeout)
         SintesisVoz.hablarTexto($scope.msg, config);
     };
 
-    $scope.SintesisVoz = SintesisVoz;
+    $scope.CancelarHablar = function () {
+        SintesisVoz.cancel();
+    }
 
 });
 // =====================================================================================================================

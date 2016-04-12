@@ -2,7 +2,7 @@
     <div class="content__item-inner">
         <img class="content__item-img animated" src="images/4.jpg" alt="Reconocimiento de Voz" />
         <h3>Reconocimiento de voz</h3>
-        <p style="color:lightblue">Demostración</p>
+        <p class="subtitulo">Demostración</p>
         <p>Aunque la tecnología "HTML5 Web Speech API" es un estandar W3C, debido a su reciente aparición,
             sólo algunos navegadores como Chrome la incorporan. Usando dicha tecnología, esta demostración
             permite interactuar con un programa de distintas maneras: ejecutando comandos por voz
@@ -13,7 +13,7 @@
             Consultar compatibilidad entre navegadores &rarr;
         </a></p>
         <p>La demostración está dividida en tres secciones o pantallas:</p>
-        <ol style="font-size:14px">
+        <ol class="font-size-14">
             <li class="pad-botm5">Instrucciones (esta pantalla)</li>
             <li class="pad-botm5">Ejecución de comandos por voz</li>
             <li class="pad-botm5">Síntesis de voz</li>
@@ -21,7 +21,7 @@
         <p>Se puede acceder a cada sección navegando con las flechas por las distintas pantallas hasta llegar
             a la sección elegida o mediante comandos de voz</p>
         <h3>Instrucciones</h3>
-        <ul style="font-size:14px;">
+        <ul class="font-size-14 pad-left-15">
             <li class="pad-botm5">Siempre que se solicite, conceder permiso a la aplicación para que
                 acceda al hardware del micrófono</li>
             <li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
@@ -31,9 +31,9 @@
             <li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
                 Android por las cuestiones de compatibilidad antes mencionadas
             </li>
-            <li class="pad-botm5">El reconocimiento de voz se realiza mediante un servicio web remoto
-                por lo que se necesita una conexión de red. Dependiendo del ancho de banda disponible
-                a veces los resultados pueden tardar algunos segundos en ser obtenidos</li>
         </ul>
+        <p class="p-cerrar-pagina">
+            <button ng-click="cerrarPagina()" class="btn"><i class="ion-ios-close-outline"></i> Cerrar</button>
+        </p>
     </div>
 </div>

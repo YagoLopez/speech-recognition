@@ -1,49 +1,64 @@
-# Speech Recognition Demo
+# Speech Demo
 
-Reconocimiento de voz para aplicaciones móviles
+![Reconocimiento y síntesis de voz para smartphone](./images/88.jpg 'Reconocimiento y síntesis de voz para smartphone')
 
-[Article on Codrops](http://tympanus.net/codrops/?p=24330)
+<b style='color:blue'>Demostración de reconocimiento y síntesis de voz para aplicaciones móviles</b>
+<br/>
+<br/>
+<p>Aunque la tecnología "<i>HTML5 Web Speech API</i>" 
+    es un <a href='https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html' target='_blank_'>estandar W3C</a>, 
+    debido a su reciente aparición,
+    sólo algunos navegadores como Chrome o FireFox en sus últimas versiones la incorporan. 
+    Usando dicha tecnología, esta demostración
+    permite interactuar con un programa de distintas maneras: <b>ejecutando comandos por voz</b>
+    o <b>convirtiendo texto a voz mediante habla sintética</b></p>
+    
+<p style='text-align:center'><span style='color:red'><b>Nota:</b> Esta es una tecnología experimenta. Los navegadores  Microsoft IE, Edge,
+    Ópera y Safari no son compatibles con esta aplicación por no  implementar el estándar</span></p>
+    
+<p style='text-align:center'><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
+    Consultar compatibilidad entre navegadores
+</a> &rarr;</p>
 
-[Demo](http://tympanus.net/Blueprints/ZoomSlider/)
+<p>La demostración está dividida en tres secciones o pantallas:</p>
 
-The Blueprints are a collection of basic and minimal website concepts, components, plugins and layouts with minimal style for easy adaption and usage, or simply for inspiration.
+<ol class="font-size-14">
+    <li class="pad-botm5"><b>Pantalla de instrucciones</b></li>
+    <li class="pad-botm5"><b>Ejecución de comandos por voz:</b> Desde esta pantalla se puede activar/desactivar el reconocimiento de voz</li>
+    <li class="pad-botm5"><b>Síntesis de voz:</b> Desde esta pantalla se puede activar/desactivar la síntesis de viz</li>
+</ol>
 
-View the [Blueprints archive] (http://tympanus.net/codrops/category/blueprints/)
+<p>Se puede acceder a cada sección navegando con las flechas por las distintas pantallas hasta llegar
+    a la sección elegida o mediante comandos de voz</p>
+    
+<h3>Instrucciones</h3>
+<ul class="font-size-14 pad-left-15">
+<li class="pad-botm5">Conceder permiso a la aplicación para que
+    acceda al hardware del micrófono siempre que se solicite</li>
+<li class="pad-botm5">Durante el reconocimiento de voz, hablar a pocos centímetros del micrófono</li>
+<li class="pad-botm5">Situarse en un entorno silencioso</li>
+<li class="pad-botm5">Utilizar un tono claro y normal</li>
+<li class="pad-botm5">Navegador compatible requerido</li>
+<li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
+    Android por las cuestiones de compatibilidad antes mencionadas
+</li>
 
-## License
+<br/>
+<div style='text-align:center'><a href='./iframe/iframe.html' target='_blank_'><b>VER ONLINE VERSION PARA WEB</b></a> &rarr;</div>
 
-Use it freely but do not distribute or sell "as-is". Read more here: [Codrops License](http://tympanus.net/codrops/licensing/)
+<h1>Auditoría</h1>
 
-## Credits
+<h3>Gráfico de carga:</h3>
 
-[Dynamic.js](http://dynamicsjs.com/) by Michaël Villar
+- Descomposción de los datos de la aplicación según el tipo de fichero y cantidad de datos
+- Número de peticiones HTTP realizadas usando chaché y sin usarla
 
-[Modernizr](http://modernizr.com/) by the Modernizr Team
+Este gráfico permite visualizar cuántos datos se movilizan antes y después de usar la memoria caché, y ver cómo se agrupan según los tipos de ficheros.
 
-### Images 
+La primera vez que se carge la aplicación en memoria sin utilzar la cache será necesario movilizar 793 K. Las siguientes  veces que se cargue la aplicación usando la caché, será necesario movilizar solamente 21.5 K.
 
-[Flat Apple Devices](http://drbl.in/jsoj) by Peter Finlan
+![Gráfico de carga](./auditoria/audit.jpg 'Gráfico de carga')
 
-[Apple Watch](http://drbl.in/mNVE) by Vincent Le Moign
-
-[Website Mockup "Space Exploration"](http://drbl.in/oMJD) by Ante Matijaca
-
-[Free To-Do App UI](http://www.invisionapp.com/do/sketchappsources) by InVision
-
-[Pex: Free Website PSD](http://blazrobar.com/2015/free-psd-website-templates/pex-a-free-website-home-page-photoshop-psd/) by Blaz
-
-[Perspective App Screen Mockup](http://graphicburger.com/perspective-app-screens-mock-up/) by GraphicBurger
-
-### Icons 
-
-[Feather Icons](https://gumroad.com/l/feather) by Cole Bemis
-
-Icon font created with [IcoMoon](https://icomoon.io)
-
-## Misc
-
-Follow us: [Twitter](http://www.twitter.com/codrops), [Facebook](http://www.facebook.com/pages/Codrops/159107397912), [Google+](https://plus.google.com/101095823814290637419), [GitHub](https://github.com/codrops), [Pinterest](http://www.pinterest.com/codrops/)
-
-[© Codrops 2015](http://www.codrops.com)
-
+<br/>
+<a href='#'>Volver al principio</a> &uarr;
 
