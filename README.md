@@ -57,9 +57,9 @@
 Este gráfico permite visualizar cuántos datos se movilizan antes y después de usar la memoria caché, y ver cómo se agrupan según los tipos de ficheros.
 
 La primera vez que se carge la aplicación en memoria sin utilzar la cache será necesario movilizar 793 K. Las siguientes  veces que se cargue la aplicación usando la caché, será necesario movilizar solamente 21.5 K.
+Esto se aplica a la versión web. En la app compilada para instalar en el móvil hay que añadir el <a href='https://crosswalk-project.org/documentation/about.html' target='_blank'>Runtime WebView de Chromium.</a>
 
 ![Gráfico de carga](./auditoria/audit.jpg 'Gráfico de carga')
 
-<br/>
 <a href='#'>Volver al principio</a> &uarr;
 
