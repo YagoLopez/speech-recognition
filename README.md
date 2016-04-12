@@ -13,7 +13,7 @@
     permite interactuar con un programa de distintas maneras: <b>ejecutando comandos por voz</b>
     o <b>convirtiendo texto a voz mediante habla sintética</b></p>
     
-<p style='text-align:center'><span style='color:red'><b>Nota:</b> Esta es una tecnología experimenta. Los navegadores  Microsoft IE, Edge,
+<p style='text-align:center'><span style='color:red'><b>Nota:</b> Esta es una tecnología experimental. Los navegadores  Microsoft IE, Edge,
     Ópera y Safari no son compatibles con esta aplicación por no  implementar el estándar</span></p>
     
 <p style='text-align:center'><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
