@@ -51,7 +51,7 @@
 <h3>Gráfico de carga:</h3>
 
 - Descomposción de los datos de la aplicación según el tipo de fichero y cantidad de datos
-- Número de peticiones HTTP realizadas usando chaché y sin usarla
+- Número de peticiones HTTP realizadas usando caché y sin usarla
 
 Este gráfico permite visualizar cuántos datos se movilizan antes y después de usar la memoria caché, y ver cómo se agrupan según los tipos de ficheros.
 
