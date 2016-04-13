@@ -27,7 +27,7 @@
     <li class="pad-botm5"><b>Síntesis de voz:</b> Desde esta pantalla se puede activar/desactivar la síntesis de voz</li>
 </ol>
 
-<p>Se puede acceder a cada pantalla navegando usando las flechas de la parte inferiors hasta llegar
+<p>Se puede acceder a cada pantalla  usando las flechas de la parte inferior hasta llegar
     a la sección elegida. También es posible la navegación entre pantallas usando comandos de voz</p>
     
 <h3>Instrucciones</h3>
