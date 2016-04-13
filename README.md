@@ -5,31 +5,30 @@
 <b style='color:blue'>Demostración de reconocimiento y síntesis de voz para aplicaciones móviles</b>
 <br/>
 <br/>
-<p>Aunque la tecnología "<i>HTML5 Web Speech API</i>" 
-    es un <a href='https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html' target='_blank_'>estandar W3C</a>, 
-    debido a su reciente aparición
-    sólo algunos navegadores como Chrome o FireFox en sus últimas versiones la incorporan. 
+<p>La tecnología "<i>HTML5 Web Speech API</i>" 
+    es una <a href='https://dvcs.w3.org/hg/speech-api/raw-file/tip/speechapi.html' target='_blank_'>propuesta del
+     W3C</a> relativamente reciente y por lo tanto sólo algunos navegadores como Chrome o FireFox la incorporan en sus últimas versiones. 
     Usando dicha tecnología, esta demostración
     permite interactuar con un programa de distintas maneras: <b>ejecutando comandos por voz</b>
     o <b>convirtiendo texto a voz mediante habla sintética</b></p>
     
-<p style='text-align:center'><span style='color:red'><b>Nota:</b> Esta es una tecnología experimental. Los navegadores  Microsoft IE, Edge,
-    Ópera y Safari no son compatibles con esta aplicación por no  implementar el estándar</span></p>
-    
-<p style='text-align:center'><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
+    Nota: Esta es una tecnología experimental. Los navegadores Microsoft IE, Edge, Ópera y Safari no son compatibles con esta aplicación.
+  
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
     Consultar compatibilidad entre navegadores
 </a> &rarr;</p>
+<br/>
 
 <p>La demostración está dividida en tres secciones o pantallas:</p>
 
 <ol class="font-size-14">
     <li class="pad-botm5"><b>Pantalla de instrucciones</b></li>
     <li class="pad-botm5"><b>Ejecución de comandos por voz:</b> Desde esta pantalla se puede activar/desactivar el reconocimiento de voz</li>
-    <li class="pad-botm5"><b>Síntesis de voz:</b> Desde esta pantalla se puede activar/desactivar la síntesis de viz</li>
+    <li class="pad-botm5"><b>Síntesis de voz:</b> Desde esta pantalla se puede activar/desactivar la síntesis de voz</li>
 </ol>
 
-<p>Se puede acceder a cada sección navegando con las flechas por las distintas pantallas hasta llegar
-    a la sección elegida o mediante comandos de voz</p>
+<p>Se puede acceder a cada pantalla navegando usando las flechas de la parte inferiors hasta llegar
+    a la sección elegida. También es posible la navegación entre pantallas usando comandos de voz</p>
     
 <h3>Instrucciones</h3>
 <ul class="font-size-14 pad-left-15">
@@ -42,9 +41,10 @@
 <li class="pad-botm5">En caso de usar móvil sólo se garantiza el funcionamiento en
     Android por las cuestiones de compatibilidad antes mencionadas
 </li>
+</ul>
 
-<div style='text-align:center'><a href='http://yagolopez.github.io/speech-recognition/iframe/iframe.html' target='_blank_'>
-<b>VER ONLINE VERSION PARA WEB</b></a> &rarr;</div>
+<a href='http://yagolopez.github.io/speech-recognition/iframe/iframe.html' target='_blank_'>
+<b>VER ONLINE VERSION PARA WEB</b></a> &rarr;
 
 <h1>Auditoría</h1>
 
