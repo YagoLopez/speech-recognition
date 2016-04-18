@@ -12,7 +12,8 @@
     permite interactuar con un programa de distintas maneras: <b>ejecutando comandos por voz</b>
     o <b>convirtiendo texto a voz mediante habla sintética</b></p>
     
-    Nota: Esta es una tecnología experimental. Los navegadores Microsoft IE, Edge, Ópera y Safari no son compatibles con esta aplicación.
+            NOTA: Esta es una tecnología experimental. Los navegadores Microsoft IE, Edge, Ópera y Safari
+                  no son compatibles con esta aplicación.
   
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API#Browser_compatibility" target="_blank">
     Consultar compatibilidad entre navegadores
@@ -44,7 +45,7 @@
 </ul>
 
 <a href='http://yagolopez.github.io/speech-recognition/iframe/iframe.html' target='_blank_'>
-<b>VER ONLINE VERSION PARA WEB</b></a> &rarr;
+<b>VERSION ONLINE PARA WEB</b></a> &rarr;
 
 <h1>Auditoría</h1>
 
@@ -53,9 +54,10 @@
 - Descomposción de los datos de la aplicación según el tipo de fichero y cantidad de datos
 - Número de peticiones HTTP realizadas usando caché y sin usarla
 
-Este gráfico permite visualizar cuántos datos se movilizan antes y después de usar la memoria caché, y ver cómo se agrupan según los tipos de ficheros.
+Este gráfico permite visualizar cuántos datos se movilizan antes y después de usar la memoria caché, y ver las agrupaciones de ficheros por tipo.
 
 La primera vez que se carge la aplicación en memoria sin utilzar la cache será necesario movilizar 793 K. Las siguientes  veces que se cargue la aplicación usando la caché, será necesario movilizar solamente 21.5 K.
+
 Esto se aplica a la versión web. En la app compilada para instalar en el móvil hay que añadir el <a href='https://crosswalk-project.org/documentation/about.html' target='_blank'>Runtime WebView de Chromium.</a>
 
 ![Gráfico de carga](./auditoria/audit.jpg 'Gráfico de carga')
