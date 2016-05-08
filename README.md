@@ -2,7 +2,7 @@
 
 ![Reconocimiento y síntesis de voz para smartphone](./images/88.jpg 'Reconocimiento y síntesis de voz para smartphone')
 
-<b style='color:blue'>Demostración de reconocimiento y síntesis de voz para aplicaciones móviles</b>
+<b style='color:blue'>Demostración de reconocimiento y síntesis de voz para web y móvil</b>
 <br/>
 <br/>
 <p>La tecnología "<i>HTML5 Web Speech API</i>" 
