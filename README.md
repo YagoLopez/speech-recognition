@@ -45,7 +45,9 @@
 </ul>
 
 <a href='https://yagolopez.js.org/speech-recognition/' target='_blank_'>
-<b>DEMO ONLINE</b></a> &rarr;
+<b>DEMO FULLSCREEN FOR MOBILE</b></a> &rarr;
+<a href='http://mobiletest.me/htc_one_emulator/?u=https://yagolopez.github.io/speech-recognition' target='_blank_'>
+<b>DEMO FOR DESKTOP</b></a> &rarr;
 
 <h1>Auditoría</h1>
 
